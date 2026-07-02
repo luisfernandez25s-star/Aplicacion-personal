@@ -126,12 +126,26 @@ class MainActivity : Activity(), SensorEventListener {
         putDataMapReq.dataMap.putFloat("value_z", z)
         putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
         
+        // Sincronización extra para asegurar que los datos fluyan
         val putDataReq = putDataMapReq.asPutDataRequest()
         putDataReq.setUrgent()
         
+        Log.d("Wear", "Intentando enviar datos de $sensorName al celular...")
         dataClient.putDataItem(putDataReq)
-            .addOnSuccessListener { Log.d("Wear", "Data sent successfully: $sensorName") }
-            .addOnFailureListener { e -> Log.e("Wear", "Failed to send data", e) }
+            .addOnSuccessListener { 
+                Log.d("Wear", "¡ÉXITO! Datos de $sensorName enviados al celular") 
+                handler.post {
+                    tvStatus.text = "Enviando: $sensorName"
+                    tvStatus.setTextColor(Color.GREEN)
+                }
+            }
+            .addOnFailureListener { e -> 
+                Log.e("Wear", "ERROR: No se pudo enviar datos al celular", e)
+                handler.post {
+                    tvStatus.text = "Error de Envío"
+                    tvStatus.setTextColor(Color.RED)
+                }
+            }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}

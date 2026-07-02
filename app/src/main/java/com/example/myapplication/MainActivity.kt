@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
@@ -45,21 +46,20 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, getString(R.string.sending_test_data), Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Sincronizando con el Reloj...", Snackbar.LENGTH_LONG)
                 .setAction("Acción", null)
                 .setAnchorView(R.id.fab).show()
             
-            // Prueba de inserción
-            lifecycleScope.launch(Dispatchers.IO) {
-                val reading = com.example.myapplication.data.SensorReading(
-                    sensorName = "Prueba Manual",
-                    valueX = 1.0f,
-                    valueY = 0f,
-                    valueZ = 0f,
-                    timestamp = System.currentTimeMillis(),
-                )
-                com.example.myapplication.data.MongoDBManager.getInstance().saveReading(reading)
-            }
+            // Forzar detección de nodos
+            com.google.android.gms.wearable.Wearable.getNodeClient(this).connectedNodes
+                .addOnSuccessListener { nodes ->
+                    Log.d("MainActivity", "Nodos detectados manualmente: ${nodes.size}")
+                    if (nodes.isEmpty()) {
+                        Snackbar.make(view, "No se detecta el reloj. Verifica el Bluetooth.", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(view, "Reloj vinculado: ${nodes.size} dispositivo(s)", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 

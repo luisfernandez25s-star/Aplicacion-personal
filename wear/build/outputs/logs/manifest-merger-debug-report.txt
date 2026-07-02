@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-29:12
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-33:12
+INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-33:12
+INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-33:12
+INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:2:1-33:12
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:14:1-34:12
 MERGED from [com.google.android.gms:play-services-wearable:19.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\210b6f929f8c05140580a1dd3102dd6a\transformed\play-services-wearable-19.0.0\AndroidManifest.xml:17:1-24:12
@@ -58,9 +58,25 @@ uses-permission#android.permission.ACTIVITY_RECOGNITION
 ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:5-79
 	android:name
 		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:22-76
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:5-68
+	android:name
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:5-74
+	android:name
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:22-71
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:5-73
+	android:name
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:22-70
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:5-76
+	android:name
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:22-73
 application
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:5-27:19
-INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:5-27:19
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:5-31:19
+INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:5-31:19
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:23:5-32:19
@@ -86,37 +102,37 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\fluis_nuf\.gradle\
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\2b3093b2f43df11bf9291c531719b112\transformed\core-1.19.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:9-41
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:9-41
 	android:allowBackup
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:14:9-35
 	android:theme
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:9-59
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:9-59
 uses-library#com.google.android.wearable
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:9-17:39
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-21:39
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:23:9-25:40
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:23:9-25:40
 	android:required
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:13-36
-	android:name
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:13-55
-activity#com.example.myapplication.MainActivity
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-26:20
-	android:exported
 		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:13-36
 	android:name
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:13-41
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:13-55
+activity#com.example.myapplication.MainActivity
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:9-30:20
+	android:exported
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:22:13-25:29
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:26:13-29:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:17-69
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:27:17-69
 	android:name
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:25-66
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:27:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:17-77
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:28:17-77
 	android:name
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:27-74
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:28:27-74
 uses-sdk
 INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml

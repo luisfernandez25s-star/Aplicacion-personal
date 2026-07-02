@@ -15,7 +15,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "MONGODB_URI", "\"mongodb+srv://luisg:G3r0n1m0202005@escuela.tjez8ct.mongodb.net/?appName=Escuela\"")
+        buildConfigField("String", "MONGODB_URI", "\"mongodb://luisg:gb22x4hLFjueWDKo@escuela-shard-00-00.tjez8ct.mongodb.net:27017,escuela-shard-00-01.tjez8ct.mongodb.net:27017,escuela-shard-00-02.tjez8ct.mongodb.net:27017/Sensores?ssl=true&replicaSet=atlas-7t8p5f-shard-00&authSource=admin&retryWrites=true&w=majority\"")
     }
 
     buildTypes {
