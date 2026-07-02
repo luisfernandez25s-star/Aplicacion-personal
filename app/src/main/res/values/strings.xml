@@ -9,4 +9,5 @@
     <string name="no_readings">No hay lecturas aún</string>
     <string name="sending_test_data">Enviando dato de prueba a MongoDB...</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="test_mongo">Probar Conexión Mongo</string>
 </resources>

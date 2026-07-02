@@ -1,7 +1,7 @@
 package com.example.myapplication.service
 
 import android.util.Log
-import com.example.myapplication.data.AppDatabase
+import com.example.myapplication.data.MongoDBManager
 import com.example.myapplication.data.SensorReading
 import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
@@ -46,12 +46,12 @@ class WearableService : WearableListenerService() {
                 timestamp = timestamp
             )
             
-            // Guardar localmente en Room
-            val database = AppDatabase.getDatabase(applicationContext)
-            database.sensorDao().insert(reading)
+            // Guardar en la nube (MongoDB Atlas) - PRIORIDAD
+            MongoDBManager.getInstance().saveReading(reading)
             
-            // Guardar en la nube (MongoDB)
-            com.example.myapplication.data.MongoDBManager.getInstance().saveReading(reading)
+            // Guardar localmente en Room (Opcional, desactivado por petición del usuario)
+            // val database = AppDatabase.getDatabase(applicationContext)
+            // database.sensorDao().insert(reading)
         }
     }
 

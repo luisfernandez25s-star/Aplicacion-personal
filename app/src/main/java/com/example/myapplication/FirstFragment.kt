@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentFirstBinding
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.data.AppDatabase
+import com.example.myapplication.data.MongoDBManager
+import com.example.myapplication.data.SensorReading
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -37,6 +42,26 @@ class FirstFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        binding.buttonTestMongo.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val reading = SensorReading(
+                    sensorName = "Prueba Manual UI",
+                    valueX = 0f,
+                    valueY = 0f,
+                    valueZ = 0f,
+                    timestamp = System.currentTimeMillis()
+                )
+                try {
+                    withContext(Dispatchers.IO) {
+                        MongoDBManager.getInstance().saveReading(reading)
+                    }
+                    Toast.makeText(requireContext(), "Comando de envío enviado a Atlas", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         val database = AppDatabase.getDatabase(requireContext())

@@ -1,18 +1,40 @@
 package com.example.myapplication.data
 
+import android.util.Log
 import com.example.myapplication.BuildConfig
 import com.mongodb.kotlin.client.coroutine.MongoClient
+import com.mongodb.kotlin.client.coroutine.MongoCollection
+import com.mongodb.kotlin.client.coroutine.MongoDatabase
 import org.bson.Document
-import android.util.Log
 
-class MongoDBManager {
+class MongoDBManager private constructor() {
     private val connectionString = BuildConfig.MONGODB_URI
-    private val client = MongoClient.create(connectionString)
-    private val database = client.getDatabase("Escuela")
-    private val collection = database.getCollection<Document>("LecturasSensores")
+    private var client: MongoClient? = null
+    private var database: MongoDatabase? = null
+    private var collection: MongoCollection<Document>? = null
+
+    private fun init() {
+        if (client == null) {
+            try {
+                client = MongoClient.create(connectionString)
+                database = client?.getDatabase("Escuela")
+                collection = database?.getCollection<Document>("LecturasSensores")
+                Log.d("MongoDBManager", "Cliente MongoDB inicializado correctamente")
+            } catch (e: Exception) {
+                Log.e("MongoDBManager", "Error al inicializar MongoDB: ${e.message}")
+            }
+        }
+    }
 
     suspend fun saveReading(reading: SensorReading) {
-        Log.d("MongoDBManager", "Intentando guardar en MongoDB: ${reading.sensorName}")
+        init()
+        Log.d("MongoDBManager", "Intentando guardar en MongoDB Atlas: ${reading.sensorName}")
+        
+        val coll = collection ?: run {
+            Log.e("MongoDBManager", "La colección es nula, no se puede guardar")
+            return
+        }
+
         try {
             val doc = Document()
                 .append("sensorName", reading.sensorName)
@@ -21,11 +43,10 @@ class MongoDBManager {
                 .append("z", reading.valueZ.toDouble())
                 .append("timestamp", reading.timestamp)
             
-            val result = collection.insertOne(doc)
+            val result = coll.insertOne(doc)
             Log.d("MongoDBManager", "Dato enviado exitosamente a MongoDB Atlas: ${result.insertedId}")
         } catch (e: Exception) {
-            Log.e("MongoDBManager", "Error al conectar o insertar en MongoDB Atlas. Verifica tu IP y la conexión a Internet.", e)
-            e.printStackTrace()
+            Log.e("MongoDBManager", "Error al insertar en MongoDB Atlas: ${e.message}", e)
         }
     }
     
