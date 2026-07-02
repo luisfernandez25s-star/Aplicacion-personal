@@ -1,6 +1,7 @@
 package com.example.myapplication.service
 
 import android.util.Log
+import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.MongoDBManager
 import com.example.myapplication.data.SensorReading
 import com.google.android.gms.wearable.DataEvent
@@ -46,12 +47,21 @@ class WearableService : WearableListenerService() {
                 timestamp = timestamp
             )
             
-            // Guardar en la nube (MongoDB Atlas) - PRIORIDAD
-            MongoDBManager.getInstance().saveReading(reading)
-            
-            // Guardar localmente en Room (Opcional, desactivado por petición del usuario)
-            // val database = AppDatabase.getDatabase(applicationContext)
-            // database.sensorDao().insert(reading)
+            // Guardar localmente en Room primero para asegurar que la UI vea algo
+            try {
+                val database = AppDatabase.getDatabase(applicationContext)
+                database.sensorDao().insert(reading)
+                Log.d("WearableService", "Dato guardado localmente en Room")
+            } catch (e: Exception) {
+                Log.e("WearableService", "Error guardando en Room: ${e.message}")
+            }
+
+            // Guardar en la nube (MongoDB Atlas)
+            try {
+                MongoDBManager.getInstance().saveReading(reading)
+            } catch (e: Exception) {
+                Log.e("WearableService", "Error guardando en Atlas: ${e.message}")
+            }
         }
     }
 

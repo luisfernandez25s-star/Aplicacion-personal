@@ -53,125 +53,126 @@
 31-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:9-41
 32        android:supportsRtl="true"
 32-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:9-35
-33        android:theme="@android:style/Theme.DeviceDefault" >
-33-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:9-59
-34        <uses-library
-34-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:9-17:39
-35            android:name="com.google.android.wearable"
-35-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:13-55
-36            android:required="true" />
-36-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:13-36
-37
-38        <activity
-38-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-26:20
-39            android:name="com.example.myapplication.MainActivity"
-39-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:13-41
-40            android:exported="true" >
-40-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:13-36
-41            <intent-filter>
-41-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:22:13-25:29
-42                <action android:name="android.intent.action.MAIN" />
-42-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:17-69
-42-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:25-66
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-44-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:17-77
-44-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:27-74
-45            </intent-filter>
-46        </activity>
-47
-48        <uses-library
-48-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:26:9-28:40
-49            android:name="wear-sdk"
-49-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:27:13-36
-50            android:required="false" />
-50-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:28:13-37
-51
-52        <service
-52-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:24:9-31:19
-53            android:name="androidx.health.services.client.VersionApiService"
-53-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:25:13-77
-54            android:exported="true"
-54-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:26:13-36
-55            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
-55-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:27:13-108
-56            <intent-filter>
-56-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:28:13-30:29
-57                <action android:name="hs.versionclient.BIND" />
-57-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:17-64
-57-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:25-61
-58            </intent-filter>
-59        </service>
-60
-61        <activity
-61-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
-62            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-62-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
-63            android:exported="false"
-63-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
-64            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-64-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
-65
-66        <meta-data
-66-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
-67            android:name="com.google.android.gms.version"
-67-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
-68            android:value="@integer/google_play_services_version" />
-68-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
-69
-70        <provider
-70-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
-71            android:name="androidx.startup.InitializationProvider"
-71-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
-72            android:authorities="com.example.myapplication.androidx-startup"
-72-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
-73            android:exported="false" >
-73-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
-74            <meta-data
-74-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-75                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-76                android:value="androidx.startup" />
-76-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-77        </provider>
-78
-79        <receiver
-79-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-80            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-80-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-81            android:directBootAware="false"
-81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-82            android:enabled="true"
-82-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-83            android:exported="true"
-83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-84            android:permission="android.permission.DUMP" >
-84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-85            <intent-filter>
-85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-86                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-87            </intent-filter>
-88            <intent-filter>
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-89                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
-90            </intent-filter>
-91            <intent-filter>
-91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-92                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
-93            </intent-filter>
-94            <intent-filter>
-94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-95                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-96            </intent-filter>
-97        </receiver>
-98    </application>
-99
-100</manifest>
+33        android:testOnly="true"
+34        android:theme="@android:style/Theme.DeviceDefault" >
+34-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:9-59
+35        <uses-library
+35-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:9-17:39
+36            android:name="com.google.android.wearable"
+36-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:13-55
+37            android:required="true" />
+37-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:13-36
+38
+39        <activity
+39-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-26:20
+40            android:name="com.example.myapplication.MainActivity"
+40-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:13-41
+41            android:exported="true" >
+41-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:13-36
+42            <intent-filter>
+42-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:22:13-25:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:17-69
+43-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:17-77
+45-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:27-74
+46            </intent-filter>
+47        </activity>
+48
+49        <uses-library
+49-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:26:9-28:40
+50            android:name="wear-sdk"
+50-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:27:13-36
+51            android:required="false" />
+51-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:28:13-37
+52
+53        <service
+53-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:24:9-31:19
+54            android:name="androidx.health.services.client.VersionApiService"
+54-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:25:13-77
+55            android:exported="true"
+55-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:26:13-36
+56            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
+56-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:27:13-108
+57            <intent-filter>
+57-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:28:13-30:29
+58                <action android:name="hs.versionclient.BIND" />
+58-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:17-64
+58-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\26e8dbeaa66266643d698cf9fe7cd1d1\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:25-61
+59            </intent-filter>
+60        </service>
+61
+62        <activity
+62-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+63            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+63-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+64            android:exported="false"
+64-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+65            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+65-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\35096c3c1619112a63429a1064ff994a\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+66
+67        <meta-data
+67-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+68            android:name="com.google.android.gms.version"
+68-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+69            android:value="@integer/google_play_services_version" />
+69-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\5af504b6040b1ae423cd9d2a32cd29b1\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+70
+71        <provider
+71-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
+72            android:name="androidx.startup.InitializationProvider"
+72-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
+73            android:authorities="com.example.myapplication.androidx-startup"
+73-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
+74            android:exported="false" >
+74-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
+75            <meta-data
+75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+76-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+77                android:value="androidx.startup" />
+77-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+78        </provider>
+79
+80        <receiver
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+81            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+82            android:directBootAware="false"
+82-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+83            android:enabled="true"
+83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+84            android:exported="true"
+84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+85            android:permission="android.permission.DUMP" >
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+86            <intent-filter>
+86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+87                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+88            </intent-filter>
+89            <intent-filter>
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+90                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+91            </intent-filter>
+92            <intent-filter>
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+93                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+94            </intent-filter>
+95            <intent-filter>
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+96                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\061a3862c459102088680bce3fa83825\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+97            </intent-filter>
+98        </receiver>
+99    </application>
+100
+101</manifest>

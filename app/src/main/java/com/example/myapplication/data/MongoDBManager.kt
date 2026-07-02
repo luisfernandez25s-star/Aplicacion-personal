@@ -16,12 +16,13 @@ class MongoDBManager private constructor() {
     private fun init() {
         if (client == null) {
             try {
+                Log.d("MongoDBManager", "Iniciando cliente con URI: $connectionString")
                 client = MongoClient.create(connectionString)
                 database = client?.getDatabase("Escuela")
                 collection = database?.getCollection<Document>("LecturasSensores")
                 Log.d("MongoDBManager", "Cliente MongoDB inicializado correctamente")
             } catch (e: Exception) {
-                Log.e("MongoDBManager", "Error al inicializar MongoDB: ${e.message}")
+                Log.e("MongoDBManager", "Error crítico al inicializar MongoDB: ${e.message}", e)
             }
         }
     }

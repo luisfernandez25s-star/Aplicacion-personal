@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -57,9 +58,10 @@ class FirstFragment : Fragment() {
                     withContext(Dispatchers.IO) {
                         MongoDBManager.getInstance().saveReading(reading)
                     }
-                    Toast.makeText(requireContext(), "Comando de envío enviado a Atlas", Toast.LENGTH_SHORT).show()
-                } catch (e: Exception) {
-                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Comando enviado a Atlas", Toast.LENGTH_SHORT).show()
+                } catch (e: Throwable) {
+                    Log.e("FirstFragment", "Crash evitado en botón: ${e.message}", e)
+                    Toast.makeText(requireContext(), "Error de conexión: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
