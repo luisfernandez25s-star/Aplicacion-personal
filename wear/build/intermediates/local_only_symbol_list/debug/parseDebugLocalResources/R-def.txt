@@ -5,4 +5,11 @@ id tv_gyro
 id tv_heart_rate
 id tv_status
 layout activity_main
+string accel_label
 string app_name
+string connected
+string gyro_label
+string hr_label
+string no_connection
+string sending_status
+string waiting_status

@@ -42,8 +42,8 @@ class FirstFragment : Fragment() {
         val database = AppDatabase.getDatabase(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
             database.sensorDao().getAllReadings().collect { readings ->
-                val text = readings.joinToString("\n") { 
-                    "${it.sensorName}: ${it.value} (${it.timestamp})" 
+                val text = readings.take(20).joinToString("\n") { 
+                    "${it.sensorName}: [${it.valueX}, ${it.valueY}, ${it.valueZ}] (${it.timestamp})"
                 }
                 binding.textviewReadings.text = if (text.isEmpty()) getString(R.string.no_readings) else text
             }

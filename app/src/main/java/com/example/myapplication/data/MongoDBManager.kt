@@ -12,16 +12,20 @@ class MongoDBManager {
     private val collection = database.getCollection<Document>("LecturasSensores")
 
     suspend fun saveReading(reading: SensorReading) {
+        Log.d("MongoDBManager", "Intentando guardar en MongoDB: ${reading.sensorName}")
         try {
             val doc = Document()
                 .append("sensorName", reading.sensorName)
-                .append("value", reading.value.toDouble()) // Mongo prefiere Double
+                .append("x", reading.valueX.toDouble())
+                .append("y", reading.valueY.toDouble())
+                .append("z", reading.valueZ.toDouble())
                 .append("timestamp", reading.timestamp)
             
-            collection.insertOne(doc)
-            Log.d("MongoDBManager", "Dato enviado exitosamente a MongoDB Atlas")
+            val result = collection.insertOne(doc)
+            Log.d("MongoDBManager", "Dato enviado exitosamente a MongoDB Atlas: ${result.insertedId}")
         } catch (e: Exception) {
-            Log.e("MongoDBManager", "Error al conectar o insertar en MongoDB Atlas. Verifica tu IP en el dashboard de Atlas.", e)
+            Log.e("MongoDBManager", "Error al conectar o insertar en MongoDB Atlas. Verifica tu IP y la conexión a Internet.", e)
+            e.printStackTrace()
         }
     }
     

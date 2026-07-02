@@ -2,5 +2,9 @@
     {
         "merged": "com.example.myapplication.wear-debug-23:/layout_activity_main.xml.flat",
         "source": "com.example.myapplication.wear-main-25:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\fluis_nuf\\.gradle\\daemon\\9.4.1\\com.example.myapplication.wear-debug-23:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\fluis_nuf\\.gradle\\daemon\\9.4.1\\com.example.myapplication.wear-main-25:\\layout\\activity_main.xml"
     }
 ]

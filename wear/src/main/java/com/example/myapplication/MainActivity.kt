@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.Manifest
 import android.app.Activity
 import android.graphics.Color
+import java.util.Locale
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -74,41 +75,52 @@ class MainActivity : Activity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val sensorName: String
-        val value = event.values[0]
+        val valX: Float
+        val valY: Float
+        val valZ: Float
         
         when (event.sensor.type) {
             Sensor.TYPE_HEART_RATE -> {
                 sensorName = "Ritmo Cardiaco"
-                tvHeartRate.text = getString(R.string.hr_label, value.toString())
+                valX = event.values[0]
+                valY = 0f
+                valZ = 0f
+                tvHeartRate.text = getString(R.string.hr_label, valX.toString())
             }
             Sensor.TYPE_ACCELEROMETER -> {
                 sensorName = "Acelerómetro"
-                tvAccel.text = getString(R.string.accel_label, value.toString())
+                valX = event.values[0]
+                valY = event.values[1]
+                valZ = event.values[2]
+                tvAccel.text = getString(R.string.accel_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", valX, valY, valZ))
             }
             Sensor.TYPE_GYROSCOPE -> {
                 sensorName = "Giroscopio"
-                tvGyro.text = getString(R.string.gyro_label, value.toString())
+                valX = event.values[0]
+                valY = event.values[1]
+                valZ = event.values[2]
+                tvGyro.text = getString(R.string.gyro_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", valX, valY, valZ))
             }
-            else -> {
-                sensorName = "Desconocido"
-            }
+            else -> return
         }
         
-        sendDataToPhone(sensorName, value)
+        sendDataToPhone(sensorName, valX, valY, valZ)
     }
 
-    private fun sendDataToPhone(sensorName: String, value: Float) {
+    private fun sendDataToPhone(sensorName: String, x: Float, y: Float, z: Float) {
         val dataClient = Wearable.getDataClient(this)
         val putDataMapReq = PutDataMapRequest.create("/sensor_data")
         putDataMapReq.dataMap.putString("sensor_name", sensorName)
-        putDataMapReq.dataMap.putFloat("value", value)
+        putDataMapReq.dataMap.putFloat("value_x", x)
+        putDataMapReq.dataMap.putFloat("value_y", y)
+        putDataMapReq.dataMap.putFloat("value_z", z)
         putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
         
         val putDataReq = putDataMapReq.asPutDataRequest()
         putDataReq.setUrgent()
         
         dataClient.putDataItem(putDataReq)
-            .addOnSuccessListener { Log.d("Wear", "Data sent successfully") }
+            .addOnSuccessListener { Log.d("Wear", "Data sent successfully: $sensorName") }
             .addOnFailureListener { e -> Log.e("Wear", "Failed to send data", e) }
     }
 

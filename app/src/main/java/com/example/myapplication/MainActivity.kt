@@ -53,7 +53,9 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.IO) {
                 val reading = com.example.myapplication.data.SensorReading(
                     sensorName = "Prueba Manual",
-                    value = 1.0f,
+                    valueX = 1.0f,
+                    valueY = 0f,
+                    valueZ = 0f,
                     timestamp = System.currentTimeMillis(),
                 )
                 com.example.myapplication.data.MongoDBManager.getInstance().saveReading(reading)

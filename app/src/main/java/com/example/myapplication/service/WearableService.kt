@@ -25,18 +25,26 @@ class WearableService : WearableListenerService() {
                 if (path == "/sensor_data") {
                     val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
                     val sensorName = dataMap.getString("sensor_name") ?: "Unknown"
-                    val value = dataMap.getFloat("value")
+                    val valX = dataMap.getFloat("value_x")
+                    val valY = dataMap.getFloat("value_y")
+                    val valZ = dataMap.getFloat("value_z")
                     val timestamp = dataMap.getLong("timestamp")
 
-                    saveToDatabase(sensorName, value, timestamp)
+                    saveToDatabase(sensorName, valX, valY, valZ, timestamp)
                 }
             }
         }
     }
 
-    private fun saveToDatabase(name: String, value: Float, timestamp: Long) {
+    private fun saveToDatabase(name: String, valX: Float, valY: Float, valZ: Float, timestamp: Long) {
         serviceScope.launch {
-            val reading = SensorReading(sensorName = name, value = value, timestamp = timestamp)
+            val reading = SensorReading(
+                sensorName = name,
+                valueX = valX,
+                valueY = valY,
+                valueZ = valZ,
+                timestamp = timestamp
+            )
             
             // Guardar localmente en Room
             val database = AppDatabase.getDatabase(applicationContext)

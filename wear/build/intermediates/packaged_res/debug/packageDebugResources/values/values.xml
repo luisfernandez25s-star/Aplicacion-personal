@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Application Wear</string>
+    <string name="accel_label">Acelerómetro: %s</string>
+    <string name="app_name">Mi Aplicación Wear</string>
+    <string name="connected">Conectado al celular</string>
+    <string name="gyro_label">Giroscopio: %s</string>
+    <string name="hr_label">Ritmo Cardíaco: %s</string>
+    <string name="no_connection">Sin conexión (Verificar ADB)</string>
+    <string name="sending_status">Enviando datos...</string>
+    <string name="waiting_status">Esperando sensores...</string>
 </resources>
