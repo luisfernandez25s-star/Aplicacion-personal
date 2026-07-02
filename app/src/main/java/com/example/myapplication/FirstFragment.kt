@@ -60,8 +60,9 @@ class FirstFragment : Fragment() {
                     }
                     Toast.makeText(requireContext(), "Comando enviado a Atlas", Toast.LENGTH_SHORT).show()
                 } catch (e: Throwable) {
-                    Log.e("FirstFragment", "Crash evitado en botón: ${e.message}", e)
-                    Toast.makeText(requireContext(), "Error de conexión: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.e("FirstFragment", "Error en Atlas: ${e.message}", e)
+                    val errorMsg = e.localizedMessage ?: "Error desconocido"
+                    Toast.makeText(requireContext(), "Error Atlas: $errorMsg", Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -5,6 +5,6 @@
     <string name="gyro_label">Giroscopio: %s</string>
     <string name="sending_status">Enviando datos...</string>
     <string name="waiting_status">Esperando sensores...</string>
-    <string name="no_connection">Sin conexión (Verificar ADB)</string>
-    <string name="connected">Conectado al celular</string>
+    <string name="no_connection">Buscando celular...</string>
+    <string name="connected">Conectado (Bluetooth/Red)</string>
 </resources>

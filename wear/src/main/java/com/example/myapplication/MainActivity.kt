@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.Manifest
 import android.app.Activity
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import java.util.Locale
 import android.content.pm.PackageManager
 import android.hardware.Sensor
@@ -28,6 +30,14 @@ class MainActivity : Activity(), SensorEventListener {
     private lateinit var tvHeartRate: TextView
     private lateinit var tvAccel: TextView
     private lateinit var tvGyro: TextView
+    
+    private val handler = Handler(Looper.getMainLooper())
+    private val checkNodesRunnable = object : Runnable {
+        override fun run() {
+            checkNodes()
+            handler.postDelayed(this, 5000) // Reintentar cada 5 segundos
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,10 +142,12 @@ class MainActivity : Activity(), SensorEventListener {
             == PackageManager.PERMISSION_GRANTED) {
             registerSensors()
         }
+        handler.post(checkNodesRunnable)
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
+        handler.removeCallbacks(checkNodesRunnable)
     }
 }
