@@ -42,29 +42,6 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { result ->
         Timber.d("Permission result: $result")
-        val allGranted = result.all { it.value }
-        if (allGranted) {
-            // After body sensors are granted, we might need to ask for background separately on API 33+
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS_BACKGROUND) != PackageManager.PERMISSION_GRANTED
-            ) {
-                Timber.d("Requesting background sensors separately...")
-                requestBackgroundPermissionLauncher.launch(Manifest.permission.BODY_SENSORS_BACKGROUND)
-            } else {
-                startSensors()
-            }
-        } else {
-            val denied = result.filter { !it.value }.keys
-            Timber.w("Permissions denied: $denied")
-            android.widget.Toast.makeText(this, "Permisos necesarios: $denied", android.widget.Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private val requestBackgroundPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        Timber.d("Background sensor permission granted: $isGranted")
         startSensors()
     }
 
@@ -81,6 +58,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("MainActivity: onCreate started")
         setContentView(R.layout.activity_main)
 
         tvStatus = findViewById(R.id.tv_status)
@@ -90,6 +68,12 @@ class MainActivity : ComponentActivity() {
         btnSync = findViewById(R.id.btn_sync)
         swSimulate = findViewById(R.id.sw_simulate)
 
+        // Detección de emulador mejorada
+        if (Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator") || Build.FINGERPRINT.contains("generic")) {
+            swSimulate.isChecked = true
+            Timber.i("Emulador detectado: Simulación activada")
+        }
+
         swSimulate.setOnCheckedChangeListener { _, isChecked ->
             restartSensors(isChecked)
         }
@@ -98,100 +82,68 @@ class MainActivity : ComponentActivity() {
             if (checkPermissions()) {
                 startSensorService()
                 restartSensors(swSimulate.isChecked)
-                android.widget.Toast.makeText(this, "Sincronizando datos...", android.widget.Toast.LENGTH_SHORT).show()
             } else {
                 requestRequiredPermissions()
             }
         }
 
-        requestRequiredPermissions() // Attempt immediately
-
-        // Delay second attempt slightly to ensure window is ready/focused
+        // Delay para evitar conflictos con el diálogo de permisos al arrancar
         handler.postDelayed({
             if (!checkPermissions()) {
                 requestRequiredPermissions()
+            } else {
+                startSensors()
             }
-        }, 2000)
+        }, 1500)
 
         checkNodes()
-    }
-
-    private fun requestRequiredPermissions() {
-        val permissions = mutableListOf(
-            Manifest.permission.BODY_SENSORS,
-            Manifest.permission.ACTIVITY_RECOGNITION
-        )
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            permissions.add(Manifest.permission.BLUETOOTH_SCAN)
-            permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
-        }
-
-        val notGranted = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
-
-        if (notGranted.isNotEmpty()) {
-            Timber.i("Missing permissions: $notGranted. Requesting...")
-            requestPermissionLauncher.launch(notGranted.toTypedArray())
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS_BACKGROUND) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Timber.i("Requesting background sensors...")
-            requestBackgroundPermissionLauncher.launch(Manifest.permission.BODY_SENSORS_BACKGROUND)
-        } else {
-            Timber.i("All permissions granted.")
-            startSensors()
-        }
     }
 
     private fun checkPermissions(): Boolean {
         val bodySensors = ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED
         val activityRec = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED
-        
-        var allGranted = bodySensors && activityRec
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val backgroundSensors = ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS_BACKGROUND) == PackageManager.PERMISSION_GRANTED
-            allGranted = allGranted && backgroundSensors
+        return bodySensors && activityRec
+    }
+
+    private fun requestRequiredPermissions() {
+        val permissions = mutableListOf<String>()
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.BODY_SENSORS)
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
         }
         
-        return allGranted
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        if (permissions.isNotEmpty()) {
+            Timber.i("Requesting permissions: $permissions")
+            requestPermissionLauncher.launch(permissions.toTypedArray())
+        } else {
+            startSensors()
+        }
     }
 
     private fun startSensors() {
-        if (!checkPermissions()) {
-            Timber.w("startSensors: Missing permissions")
-            requestRequiredPermissions()
-            return
-        }
-
-        Timber.d("startSensors: Initializing sensors in UI")
-        heartRateSensor.start()
-        accelerometerSensor.start()
-        gyroscopeSensor.start()
+        Timber.d("startSensors: Initializing sensors UI")
+        startSensorService()
+        
+        heartRateSensor.start(forceMock = swSimulate.isChecked)
+        accelerometerSensor.start(forceMock = swSimulate.isChecked)
+        gyroscopeSensor.start(forceMock = swSimulate.isChecked)
         
         observeSensors()
     }
 
     private fun restartSensors(simulate: Boolean) {
-        Timber.d("restartSensors: simulate=$simulate")
         heartRateSensor.stop()
         accelerometerSensor.stop()
         gyroscopeSensor.stop()
-
-        if (simulate) {
-            heartRateSensor.start(forceMock = true)
-            accelerometerSensor.start(forceMock = true)
-            gyroscopeSensor.start(forceMock = true)
-            observeSensors()
-        } else {
-            startSensors()
-        }
+        startSensors()
     }
 
     private fun observeSensors() {
@@ -199,28 +151,19 @@ class MainActivity : ComponentActivity() {
         sensorJobs.clear()
 
         heartRateSensor.dataFlow.onEach { values ->
-            if (values.isNotEmpty()) {
-                val bpm = values[0].toInt()
-                tvHeartRate.text = if (bpm > 0) "❤️ $bpm BPM" else "❤️ BUSCANDO..."
-                Timber.d("Heart Rate updated: $bpm")
-            } else {
-                tvHeartRate.text = "❤️ INICIANDO..."
-            }
+            val bpm = values.firstOrNull()?.toInt() ?: 0
+            tvHeartRate.text = if (bpm > 0) "❤️ $bpm BPM" else "❤️ BUSCANDO..."
         }.launchIn(scope).also { sensorJobs.add(it) }
 
         accelerometerSensor.dataFlow.onEach { values ->
             if (values.size >= 3) {
                 tvAccel.text = String.format(Locale.getDefault(), "XYZ: %.1f, %.1f, %.1f", values[0], values[1], values[2])
-            } else {
-                tvAccel.text = "XYZ: BUSCANDO..."
             }
         }.launchIn(scope).also { sensorJobs.add(it) }
 
         gyroscopeSensor.dataFlow.onEach { values ->
             if (values.size >= 3) {
                 tvGyro.text = String.format(Locale.getDefault(), "G: %.1f, %.1f, %.1f", values[0], values[1], values[2])
-            } else {
-                tvGyro.text = "G: BUSCANDO..."
             }
         }.launchIn(scope).also { sensorJobs.add(it) }
     }
@@ -229,17 +172,19 @@ class MainActivity : ComponentActivity() {
         val serviceIntent = Intent(this, WearSensorService::class.java).apply {
             putExtra("simulate", swSimulate.isChecked)
         }
-        startForegroundService(serviceIntent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
+        }
     }
 
     private fun checkNodes() {
-        // First check for all connected nodes
         Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
             if (nodes.isEmpty()) {
-                tvStatus.text = "SIN CONEXIÓN (BT?)"
+                tvStatus.text = "SIN CONEXIÓN"
                 tvStatus.setTextColor(android.graphics.Color.RED)
             } else {
-                // Then check if any of those nodes have the phone app capability
                 Wearable.getCapabilityClient(this)
                     .getCapability("phone_app", com.google.android.gms.wearable.CapabilityClient.FILTER_REACHABLE)
                     .addOnSuccessListener { capabilityInfo ->
@@ -252,9 +197,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
             }
-        }.addOnFailureListener {
-            Timber.e(it, "Error checking nodes")
-            tvStatus.text = "ERROR DE RED"
         }
     }
 

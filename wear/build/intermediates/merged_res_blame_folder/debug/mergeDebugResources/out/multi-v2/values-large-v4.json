@@ -4,7 +4,7 @@
             "outputFile": "com.example.myapplication.wear-mergeDebugResources-38:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\f7a7e2aea132ce4150d21a579ae7a902\\transformed\\appcompat-1.6.1\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\fluis_nuf\\.gradle\\caches\\9.4.1\\transforms\\743d5ca07e00529bb9f061751fa03b86\\transformed\\appcompat-1.6.1\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\37e1641f73e931e16b4564a41071fc45\\transformed\\material-1.12.0\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\fluis_nuf\\.gradle\\caches\\9.4.1\\transforms\\14d8ab5757ba09216e55a296a23bfb37\\transformed\\material-1.12.0\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

@@ -79,6 +79,8 @@ dependencies {
     // Utils
     implementation(libs.timber)
     implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

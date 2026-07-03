@@ -362,18 +362,6 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
 
     }
 
-    private HeartRateSensor heartRateSensor() {
-      return new HeartRateSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
-    private AccelerometerSensor accelerometerSensor() {
-      return new AccelerometerSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
-    private GyroscopeSensor gyroscopeSensor() {
-      return new GyroscopeSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
     @Override
     public void injectMainActivity(MainActivity arg0) {
       injectMainActivity2(arg0);
@@ -406,9 +394,9 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
 
     @CanIgnoreReturnValue
     private MainActivity injectMainActivity2(MainActivity instance) {
-      MainActivity_MembersInjector.injectHeartRateSensor(instance, heartRateSensor());
-      MainActivity_MembersInjector.injectAccelerometerSensor(instance, accelerometerSensor());
-      MainActivity_MembersInjector.injectGyroscopeSensor(instance, gyroscopeSensor());
+      MainActivity_MembersInjector.injectHeartRateSensor(instance, singletonCImpl.heartRateSensorProvider.get());
+      MainActivity_MembersInjector.injectAccelerometerSensor(instance, singletonCImpl.accelerometerSensorProvider.get());
+      MainActivity_MembersInjector.injectGyroscopeSensor(instance, singletonCImpl.gyroscopeSensorProvider.get());
       return instance;
     }
   }
@@ -508,18 +496,6 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
 
     }
 
-    private HeartRateSensor heartRateSensor() {
-      return new HeartRateSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
-    private AccelerometerSensor accelerometerSensor() {
-      return new AccelerometerSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
-    private GyroscopeSensor gyroscopeSensor() {
-      return new GyroscopeSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
-    }
-
     @Override
     public void injectWearSensorService(WearSensorService arg0) {
       injectWearSensorService2(arg0);
@@ -527,9 +503,9 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
 
     @CanIgnoreReturnValue
     private WearSensorService injectWearSensorService2(WearSensorService instance) {
-      WearSensorService_MembersInjector.injectHeartRateSensor(instance, heartRateSensor());
-      WearSensorService_MembersInjector.injectAccelerometerSensor(instance, accelerometerSensor());
-      WearSensorService_MembersInjector.injectGyroscopeSensor(instance, gyroscopeSensor());
+      WearSensorService_MembersInjector.injectHeartRateSensor(instance, singletonCImpl.heartRateSensorProvider.get());
+      WearSensorService_MembersInjector.injectAccelerometerSensor(instance, singletonCImpl.accelerometerSensorProvider.get());
+      WearSensorService_MembersInjector.injectGyroscopeSensor(instance, singletonCImpl.gyroscopeSensorProvider.get());
       WearSensorService_MembersInjector.injectWearDataManager(instance, singletonCImpl.wearDataManagerProvider.get());
       return instance;
     }
@@ -539,6 +515,12 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
     private final ApplicationContextModule applicationContextModule;
 
     private final SingletonCImpl singletonCImpl = this;
+
+    private dagger.internal.Provider<HeartRateSensor> heartRateSensorProvider;
+
+    private dagger.internal.Provider<AccelerometerSensor> accelerometerSensorProvider;
+
+    private dagger.internal.Provider<GyroscopeSensor> gyroscopeSensorProvider;
 
     private dagger.internal.Provider<Gson> provideGsonProvider;
 
@@ -552,12 +534,15 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
 
     @SuppressWarnings("unchecked")
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
-      this.provideGsonProvider = DoubleCheck.provider(new SwitchingProvider<Gson>(singletonCImpl, 1));
-      this.wearDataManagerProvider = DoubleCheck.provider(new SwitchingProvider<WearDataManager>(singletonCImpl, 0));
+      this.heartRateSensorProvider = DoubleCheck.provider(new SwitchingProvider<HeartRateSensor>(singletonCImpl, 0));
+      this.accelerometerSensorProvider = DoubleCheck.provider(new SwitchingProvider<AccelerometerSensor>(singletonCImpl, 1));
+      this.gyroscopeSensorProvider = DoubleCheck.provider(new SwitchingProvider<GyroscopeSensor>(singletonCImpl, 2));
+      this.provideGsonProvider = DoubleCheck.provider(new SwitchingProvider<Gson>(singletonCImpl, 4));
+      this.wearDataManagerProvider = DoubleCheck.provider(new SwitchingProvider<WearDataManager>(singletonCImpl, 3));
     }
 
     @Override
-    public void injectWearApplication(WearApplication wearApplication) {
+    public void injectWearApplication(WearApplication arg0) {
     }
 
     @Override
@@ -589,10 +574,19 @@ public final class DaggerWearApplication_HiltComponents_SingletonC {
       @Override
       public T get() {
         switch (id) {
-          case 0: // com.example.myapplication.wear.data.manager.WearDataManager 
+          case 0: // com.example.myapplication.wear.data.sensor.HeartRateSensor 
+          return (T) new HeartRateSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 1: // com.example.myapplication.wear.data.sensor.AccelerometerSensor 
+          return (T) new AccelerometerSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 2: // com.example.myapplication.wear.data.sensor.GyroscopeSensor 
+          return (T) new GyroscopeSensor(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 3: // com.example.myapplication.wear.data.manager.WearDataManager 
           return (T) new WearDataManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), singletonCImpl.provideGsonProvider.get());
 
-          case 1: // com.google.gson.Gson 
+          case 4: // com.google.gson.Gson 
           return (T) AppModule_ProvideGsonFactory.provideGson();
 
           default: throw new AssertionError(id);

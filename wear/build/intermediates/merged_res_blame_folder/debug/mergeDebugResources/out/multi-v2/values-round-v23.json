@@ -4,7 +4,7 @@
             "outputFile": "com.example.myapplication.wear-mergeDebugResources-38:/values-round-v23/values-round-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\afda89a715026913ac2445ecce6536d3\\transformed\\wear-1.4.0\\res\\values-round-v23\\values-round-v23.xml",
+                    "source": "C:\\Users\\fluis_nuf\\.gradle\\caches\\9.4.1\\transforms\\bb1083f65de5e18628d49583d2ffc1d9\\transformed\\wear-1.4.0\\res\\values-round-v23\\values-round-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

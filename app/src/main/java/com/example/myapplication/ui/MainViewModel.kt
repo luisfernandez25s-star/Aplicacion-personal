@@ -27,27 +27,27 @@ class MainViewModel @Inject constructor(
     val latestSensorData: StateFlow<SensorData?> = WearDataListenerService.latestData
     val connectionStatus: StateFlow<MongoRepository.ConnectionStatus> = mongoRepository.connectionStatus
     val connectionError: StateFlow<String?> = mongoRepository.errorMessage
-    val mongoUri: StateFlow<String?> = settingsManager.mongoUriFlow
+    val apiUri: StateFlow<String?> = settingsManager.mongoUriFlow
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     fun forceSync() {
         viewModelScope.launch {
-            mongoRepository.manualSync()
+            mongoRepository.manualSync(latestSensorData.value)
         }
     }
 
-    fun updateMongoUri(uri: String) {
+    fun updateApiUri(uri: String) {
         viewModelScope.launch {
-            if (uri.startsWith("mongodb://") || uri.startsWith("mongodb+srv://")) {
+            if (uri.startsWith("http://") || uri.startsWith("https://")) {
                 settingsManager.saveMongoUri(uri)
-                Timber.i("MongoDB URI updated manually")
+                Timber.i("API URI updated manually")
             } else {
-                Timber.w("Invalid MongoDB URI format")
+                Timber.w("Invalid API URI format")
             }
         }
     }
 
-    fun importMongoUriFromFile(context: Context, fileUri: Uri) {
+    fun importConfigFromFile(context: Context, fileUri: Uri) {
         viewModelScope.launch {
             try {
                 val inputStream: InputStream? = context.contentResolver.openInputStream(fileUri)
@@ -55,12 +55,12 @@ class MainViewModel @Inject constructor(
                 
                 if (!uri.isNullOrBlank()) {
                     settingsManager.saveMongoUri(uri)
-                    Timber.i("MongoDB URI imported successfully")
+                    Timber.i("Config imported successfully")
                 } else {
-                    Timber.w("Could not find MONGODB_URI in file")
+                    Timber.w("Could not find API_URI in file")
                 }
             } catch (e: Exception) {
-                Timber.e(e, "Error importing MongoDB URI")
+                Timber.e(e, "Error importing config")
             }
         }
     }
@@ -70,28 +70,25 @@ class MainViewModel @Inject constructor(
         
         val content = inputStream.bufferedReader().use { it.readText() }
         
-        // Try parsing as Properties first (for .env or .properties)
+        // Try parsing as Properties first
         try {
             val props = Properties()
             props.load(content.reader())
-            val uri = props.getProperty("MONGODB_URI")
+            val uri = props.getProperty("API_URI") ?: props.getProperty("MONGODB_URI")
             if (!uri.isNullOrBlank()) return uri
         } catch (e: Exception) {
-            // Not a properties file
         }
 
         // Try parsing as JSON
         try {
-            val regex = "\"MONGODB_URI\"\\s*:\\s*\"([^\"]+)\"".toRegex()
+            val regex = "\"(?:API_URI|MONGODB_URI)\"\\s*:\\s*\"([^\"]+)\"".toRegex()
             val match = regex.find(content)
             if (match != null) return match.groupValues[1]
         } catch (e: Exception) {
-            // Not valid JSON or regex failed
         }
 
-        // Try reading as plain text (first line or whole content)
         val firstLine = content.lineSequence().firstOrNull { it.isNotBlank() }
-        if (!firstLine.isNullOrBlank() && (firstLine.startsWith("mongodb://") || firstLine.startsWith("mongodb+srv://"))) {
+        if (!firstLine.isNullOrBlank() && (firstLine.startsWith("http") || firstLine.startsWith("mongodb"))) {
             return firstLine.trim()
         }
 

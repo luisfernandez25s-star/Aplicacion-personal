@@ -17,16 +17,17 @@ class SettingsManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     companion object {
-        private val MONGODB_URI_KEY = stringPreferencesKey("mongodb_uri")
+        private val API_URI_KEY = stringPreferencesKey("api_uri")
+        private val MONGODB_URI_KEY = stringPreferencesKey("mongodb_uri") // For backward compatibility if needed
     }
 
     val mongoUriFlow: Flow<String?> = context.dataStore.data.map { preferences ->
-        preferences[MONGODB_URI_KEY] ?: "mongodb://luisg:gb22x4hLFjueWDKo@escuela-shard-00-00.tjez8ct.mongodb.net:27017,escuela-shard-00-01.tjez8ct.mongodb.net:27017,escuela-shard-00-02.tjez8ct.mongodb.net:27017/Sensores?authSource=admin&tls=true&retryWrites=true&w=majority&connectTimeoutMS=20000&serverSelectionTimeoutMS=20000"
+        preferences[API_URI_KEY] ?: preferences[MONGODB_URI_KEY] ?: "https://my-backend-sensores.onrender.com/"
     }
 
     suspend fun saveMongoUri(uri: String) {
         context.dataStore.edit { preferences ->
-            preferences[MONGODB_URI_KEY] = uri
+            preferences[API_URI_KEY] = uri
         }
     }
 }

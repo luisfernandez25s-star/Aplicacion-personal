@@ -45,7 +45,13 @@ class WearSensorService : Service() {
         super.onCreate()
         createNotificationChannel()
         
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startForeground(
+                NOTIFICATION_ID,
+                createNotification(),
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH or ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             startForeground(
                 NOTIFICATION_ID,
                 createNotification(),
@@ -67,6 +73,7 @@ class WearSensorService : Service() {
     @OptIn(FlowPreview::class)
     private fun observeSensors() {
         serviceScope.launch {
+            // Usamos flows que siempre emiten algo para que el combine no se bloquee
             combine(
                 heartRateSensor.dataFlow,
                 accelerometerSensor.dataFlow,
@@ -89,8 +96,9 @@ class WearSensorService : Service() {
                     watchName = watchName
                 )
             }
-            .sample(2000) // Send at most every 2 seconds to avoid overwhelming the bridge
+            .sample(2000)
             .collect { sensorData ->
+                Timber.d("DEBUG_SYNC_WATCH: Collected data to send. HR: ${sensorData.heartRate}")
                 wearDataManager.sendSensorData(sensorData)
             }
         }

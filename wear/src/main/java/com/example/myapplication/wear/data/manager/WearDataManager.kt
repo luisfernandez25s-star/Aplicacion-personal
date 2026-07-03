@@ -58,17 +58,17 @@ class WearDataManager @Inject constructor(
             }
 
             nodes.forEach { node ->
-                Timber.d("DEBUG_SYNC: Sending message to node: ${node.displayName} (${node.id}) via path $SENSOR_PATH")
+                Timber.d("DEBUG_SYNC: Sending to ${node.displayName} (${node.id})")
                 messageClient.sendMessage(node.id, SENSOR_PATH, bytes)
                     .addOnSuccessListener {
-                        Timber.i("DEBUG_SYNC: SUCCESS! Message sent to ${node.displayName}")
+                        Timber.i("DEBUG_SYNC: SENT OK to ${node.displayName}")
                     }
                     .addOnFailureListener { e ->
-                        Timber.e(e, "DEBUG_SYNC: FAILED to send message to ${node.displayName}")
+                        Timber.e("DEBUG_SYNC: SEND ERROR: ${e.message}")
                     }
             }
         } catch (e: Exception) {
-            Timber.e(e, "DEBUG_SYNC: ERROR in sendSensorData")
+            Timber.e("DEBUG_SYNC: EXCEPTION: ${e.message}")
         }
     }
 

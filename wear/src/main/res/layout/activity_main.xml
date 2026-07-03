@@ -1,95 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#000000"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp">
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INICIANDO..."
+        android:textColor="#2196F3"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_heart_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="❤️ -- BPM"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_accel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XYZ: 0, 0, 0"
+        android:textColor="#BDBDBD"
+        android:textSize="10sp" />
+
+    <Switch
+        android:id="@+id/sw_simulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Simular"
+        android:textColor="#FFFFFF"
+        android:textSize="9sp" />
+
+    <Button
+        android:id="@+id/btn_sync"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_boxedEdges="all">
+        android:layout_height="35dp"
+        android:layout_marginTop="6dp"
+        android:backgroundTint="#2196F3"
+        android:text="INICIAR"
+        android:textSize="10sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_gyro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2196F3"
-                android:gravity="center"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MONITOR ACTIVO"
-                    android:textColor="#FFFFFF"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_heart_rate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="❤️ -- BPM"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_accel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XYZ: 0.0, 0.0, 0.0"
-                        android:textColor="#BDBDBD"
-                        android:textSize="10sp" />
-
-                    <Switch
-                        android:id="@+id/sw_simulate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Simular datos"
-                        android:textColor="#FFFFFF"
-                        android:textSize="9sp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_sync"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="#2196F3"
-                        android:text="SINCRONIZAR"
-                        android:textSize="9sp"
-                        app:cornerRadius="4dp" />
-
-                    <TextView
-                        android:id="@+id/tv_gyro"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="G: 0.0, 0.0, 0.0"
-                        android:textColor="#424242"
-                        android:textSize="8sp" />
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
-    </FrameLayout>
-</androidx.wear.widget.BoxInsetLayout>
+</LinearLayout>

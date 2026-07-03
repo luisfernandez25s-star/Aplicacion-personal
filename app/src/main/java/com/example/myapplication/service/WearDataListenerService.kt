@@ -26,6 +26,8 @@ class WearDataListenerService : WearableListenerService() {
     @Inject lateinit var gson: Gson
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private var lastSavedTimestamp = 0L
+    private val SAVE_INTERVAL_MS = 2000 // Guardar solo cada 2 segundos para evitar saturación
 
     companion object {
         private const val SENSOR_PATH = "/sensor_data"
@@ -53,23 +55,21 @@ class WearDataListenerService : WearableListenerService() {
                         String(bytes, Charsets.UTF_8)
                     }
                     
-                    Timber.d("DEBUG_SYNC_PHONE: Processing JSON: $json")
+                    Timber.d("DEBUG_SYNC_PHONE: Received JSON: $json")
                     val data = gson.fromJson(json, SensorData::class.java)
-                    _latestData.value = data
                     
-                    // Show a quick toast for debugging if needed (remove for production)
-                    // Handler(Looper.getMainLooper()).post {
-                    //     Toast.makeText(applicationContext, "Datos recibidos: HR ${data.heartRate}", Toast.LENGTH_SHORT).show()
-                    // }
-                    
-                    mongoRepository.saveSensorData(data)
-                    Timber.i("DEBUG_SYNC_PHONE: Data SAVED to MongoDB. HR: ${data.heartRate}")
+                    if (data != null) {
+                        _latestData.value = data
+                        Timber.d("DEBUG_SYNC_PHONE: UI Updated. HR: ${data.heartRate}")
+                        // Ya no guardamos automáticamente en la base de datos local
+                        // para evitar que se acumulen cientos de registros.
+                    }
                 } catch (e: Exception) {
-                    Timber.e(e, "DEBUG_SYNC_PHONE: Error processing message from ${messageEvent.sourceNodeId}")
+                    Timber.e("DEBUG_SYNC_PHONE: ERROR: ${e.message}")
                 }
             }
         } else {
-            Timber.w("DEBUG_SYNC_PHONE: Ignored message with path: ${messageEvent.path}")
+            Timber.w("DEBUG_SYNC_PHONE: Message received on unknown path: ${messageEvent.path}")
         }
     }
 
