@@ -8,7 +8,8 @@ import com.mongodb.kotlin.client.coroutine.MongoDatabase
 import org.bson.Document
 
 class MongoDBManager private constructor() {
-    private val connectionString = BuildConfig.MONGODB_URI
+    // RUTA DIRECTA PARA EVITAR ERROR DE DNS EN ANDROID
+    private val connectionString = "mongodb://luisg:gb22x4hLFjueWDKo@escuela-shard-00-00.tjez8ct.mongodb.net:27017,escuela-shard-00-01.tjez8ct.mongodb.net:27017,escuela-shard-00-02.tjez8ct.mongodb.net:27017/Sensores?ssl=true&replicaSet=atlas-7t8p5f-shard-00&authSource=admin&retryWrites=true&w=majority"
     private var client: MongoClient? = null
     private var database: MongoDatabase? = null
     private var collection: MongoCollection<Document>? = null

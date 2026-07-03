@@ -126,16 +126,15 @@ class MainActivity : Activity(), SensorEventListener {
 
     private fun sendDataToPhone(sensorName: String, x: Float, y: Float, z: Float) {
         val dataClient = Wearable.getDataClient(this)
-        // Usar un timestamp en la ruta para forzar el evento onDataChanged en el celular
-        val uniquePath = "/sensor_data/${System.currentTimeMillis()}"
-        val putDataMapReq = PutDataMapRequest.create(uniquePath)
+        val putDataMapReq = PutDataMapRequest.create("/sensor_data")
         putDataMapReq.dataMap.putString("sensor_name", sensorName)
         putDataMapReq.dataMap.putFloat("value_x", x)
         putDataMapReq.dataMap.putFloat("value_y", y)
         putDataMapReq.dataMap.putFloat("value_z", z)
         putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
+        // Fuerza bruta: Añadir un ID aleatorio para que el Data Layer siempre mande el dato
+        putDataMapReq.dataMap.putLong("force_update", System.nanoTime())
         
-        // Sincronización extra para asegurar que los datos fluyan
         val putDataReq = putDataMapReq.asPutDataRequest()
         putDataReq.setUrgent()
         

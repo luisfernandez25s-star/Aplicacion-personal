@@ -21,7 +21,7 @@ class WearableService : WearableListenerService() {
         Log.d("WearableService", "Evento de datos recibido: ${dataEvents.count} eventos")
         for (event in dataEvents) {
             val path = event.dataItem.uri.path ?: ""
-            if (event.type == DataEvent.TYPE_CHANGED && path.startsWith("/sensor_data")) {
+            if (event.type == DataEvent.TYPE_CHANGED && path == "/sensor_data") {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
                 val sensorName = dataMap.getString("sensor_name") ?: "Unknown"
                 val valX = dataMap.getFloat("value_x")
