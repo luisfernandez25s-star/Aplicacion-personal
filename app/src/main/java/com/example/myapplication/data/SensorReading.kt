@@ -11,4 +11,5 @@ data class SensorReading(
     val valueY: Float = 0f,
     val valueZ: Float = 0f,
     val timestamp: Long,
+    val isSynced: Boolean = false // Nuevo campo para control de duplicados
 )

@@ -2,65 +2,45 @@ package com.example.myapplication
 
 import android.Manifest
 import android.app.Activity
-import android.graphics.Color
-import android.os.Handler
-import android.os.Looper
-import java.util.Locale
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.wearable.PutDataMapRequest
+import com.example.myapplication.service.SensorService
 import com.google.android.gms.wearable.Wearable
+import java.util.Locale
 
 class MainActivity : Activity(), SensorEventListener {
-
-    private lateinit var sensorManager: SensorManager
-    private var heartRateSensor: Sensor? = null
-    private var accelerometer: Sensor? = null
-    private var gyroscope: Sensor? = null
 
     private lateinit var tvStatus: TextView
     private lateinit var tvHeartRate: TextView
     private lateinit var tvAccel: TextView
     private lateinit var tvGyro: TextView
     private lateinit var btnSync: android.widget.Button
-    
-    // Variables para guardar las últimas lecturas
-    private var lastHR = 0f
-    private var lastAccelX = 0f
-    private var lastAccelY = 0f
-    private var lastAccelZ = 0f
-    private var lastGyroX = 0f
-    private var lastGyroY = 0f
-    private var lastGyroZ = 0f
+    private lateinit var sensorManager: SensorManager
 
     private val handler = Handler(Looper.getMainLooper())
-    
-    // Tarea para enviar datos cada 5 segundos
-    private val sendDataRunnable = object : Runnable {
-        override fun run() {
-            sendAllDataToPhone()
-            handler.postDelayed(this, 5000) // 5 segundos
-        }
-    }
 
     private val checkNodesRunnable = object : Runnable {
         override fun run() {
             checkNodes()
-            handler.postDelayed(this, 5000) // Reintentar cada 5 segundos
+            handler.postDelayed(this, 5000)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Wear", "MainActivity iniciada")
         setContentView(R.layout.activity_main)
 
         tvStatus = findViewById(R.id.tv_status)
@@ -68,24 +48,15 @@ class MainActivity : Activity(), SensorEventListener {
         tvAccel = findViewById(R.id.tv_accel)
         tvGyro = findViewById(R.id.tv_gyro)
         btnSync = findViewById(R.id.btn_sync)
+        
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
         btnSync.setOnClickListener {
-            sendAllDataToPhone()
+            startSensorService()
         }
 
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        heartRateSensor = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE)
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
-
-        // Verificar sensores disponibles para depuración
-        if (heartRateSensor == null) Log.w("Wear", "Sensor de Ritmo Cardiaco NO disponible")
-        if (accelerometer == null) Log.w("Wear", "Acelerómetro NO disponible")
-        if (gyroscope == null) Log.w("Wear", "Giroscopio NO disponible")
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS)
-            != PackageManager.PERMISSION_GRANTED) {
-            Log.d("Wear", "Solicitando permisos de sensores")
+        // Solicitar permisos y registrar sensores
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BODY_SENSORS), 1)
         } else {
             registerSensors()
@@ -93,119 +64,67 @@ class MainActivity : Activity(), SensorEventListener {
         checkNodes()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Wear", "Permiso concedido, registrando sensores")
-            registerSensors()
-        } else {
-            Log.w("Wear", "Permiso denegado")
-            tvStatus.text = "Permiso Denegado"
-            tvStatus.setTextColor(Color.RED)
-        }
-    }
-
-    private fun checkNodes() {
-        Wearable.getNodeClient(this).connectedNodes
-            .addOnSuccessListener { nodes ->
-                if (nodes.isEmpty()) {
-                    Log.w("Wear", "No hay nodos conectados. ¿Están emparejados los emuladores?")
-                    tvStatus.text = getString(R.string.no_connection)
-                    tvStatus.setTextColor(Color.RED)
-                } else {
-                    Log.d("Wear", "Nodos conectados: ${nodes.size}")
-                    tvStatus.text = getString(R.string.connected)
-                    tvStatus.setTextColor(Color.GREEN)
-                }
-            }
-    }
-
     private fun registerSensors() {
-        heartRateSensor?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
-        accelerometer?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
-        gyroscope?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL) }
+        val sensors = listOf(
+            sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE),
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+        )
+        sensors.forEach { sensor ->
+            sensor?.let { 
+                sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
+                Log.d("Wear", "Sensor registrado: ${it.name}")
+            } ?: Log.e("Wear", "Sensor no disponible")
+        }
+        startSensorService()
+    }
+
+    private fun startSensorService() {
+        val serviceIntent = Intent(this, SensorService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
+        }
     }
 
     override fun onSensorChanged(event: SensorEvent) {
         when (event.sensor.type) {
-            Sensor.TYPE_HEART_RATE -> {
-                lastHR = event.values[0]
-                tvHeartRate.text = getString(R.string.hr_label, lastHR.toString())
-            }
-            Sensor.TYPE_ACCELEROMETER -> {
-                lastAccelX = event.values[0]
-                lastAccelY = event.values[1]
-                lastAccelZ = event.values[2]
-                tvAccel.text = getString(R.string.accel_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", lastAccelX, lastAccelY, lastAccelZ))
-            }
-            Sensor.TYPE_GYROSCOPE -> {
-                lastGyroX = event.values[0]
-                lastGyroY = event.values[1]
-                lastGyroZ = event.values[2]
-                tvGyro.text = getString(R.string.gyro_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", lastGyroX, lastGyroY, lastGyroZ))
-            }
+            Sensor.TYPE_HEART_RATE -> tvHeartRate.text = "❤️ ${event.values[0].toInt()} BPM"
+            Sensor.TYPE_ACCELEROMETER -> tvAccel.text = String.format(Locale.getDefault(), "XYZ: %.1f, %.1f, %.1f", event.values[0], event.values[1], event.values[2])
+            Sensor.TYPE_GYROSCOPE -> tvGyro.text = String.format(Locale.getDefault(), "G: %.1f, %.1f, %.1f", event.values[0], event.values[1], event.values[2])
         }
-    }
-
-    private fun sendAllDataToPhone() {
-        val dataClient = Wearable.getDataClient(this)
-        val putDataMapReq = PutDataMapRequest.create("/sensor_data")
-        
-        // Enviamos todo en un solo mapa para mayor eficiencia
-        putDataMapReq.dataMap.putFloat("hr", lastHR)
-        putDataMapReq.dataMap.putFloat("ax", lastAccelX)
-        putDataMapReq.dataMap.putFloat("ay", lastAccelY)
-        putDataMapReq.dataMap.putFloat("az", lastAccelZ)
-        putDataMapReq.dataMap.putFloat("gx", lastGyroX)
-        putDataMapReq.dataMap.putFloat("gy", lastGyroY)
-        putDataMapReq.dataMap.putFloat("gz", lastGyroZ)
-        putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
-        
-        // Importante: forzar cambio para que onDataChanged se dispare siempre
-        putDataMapReq.dataMap.putLong("sync_id", System.nanoTime())
-        
-        val putDataReq = putDataMapReq.asPutDataRequest()
-        putDataReq.setUrgent()
-        
-        Log.d("Wear", "Sincronizando todos los sensores...")
-        dataClient.putDataItem(putDataReq)
-            .addOnSuccessListener { 
-                Log.d("Wear", "Sincronización exitosa")
-                handler.post {
-                    val time = java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(java.util.Date())
-                    tvStatus.text = "Sincronizado: $time"
-                    tvStatus.setTextColor(Color.GREEN)
-                }
-            }
-            .addOnFailureListener { e -> 
-                Log.e("Wear", "Fallo al sincronizar", e)
-                handler.post {
-                    tvStatus.text = "Error de Sincronización"
-                    tvStatus.setTextColor(Color.RED)
-                }
-            }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
-    override fun onResume() {
-        super.onResume()
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS)
-            == PackageManager.PERMISSION_GRANTED) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             registerSensors()
         }
+    }
+
+    private fun checkNodes() {
+        Wearable.getNodeClient(this).connectedNodes.addOnSuccessListener { nodes ->
+            if (nodes.isEmpty()) {
+                tvStatus.text = "BUSCANDO CELULAR..."
+                tvStatus.setTextColor(Color.WHITE)
+            } else {
+                tvStatus.text = "MONITOR ACTIVO"
+                tvStatus.setTextColor(Color.WHITE)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerSensors()
         handler.post(checkNodesRunnable)
-        handler.post(sendDataRunnable) // Iniciar bucle de 5 segundos
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
         handler.removeCallbacks(checkNodesRunnable)
-        handler.removeCallbacks(sendDataRunnable) // Detener bucle
     }
 }

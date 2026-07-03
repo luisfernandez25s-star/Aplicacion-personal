@@ -114,37 +114,44 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 try {
                     binding.buttonTestMongo.isEnabled = false
-                    binding.buttonTestMongo.text = "SUBIENDO..."
+                    binding.buttonTestMongo.text = "ENVIANDO..."
                     
                     val db = AppDatabase.getDatabase(requireContext().applicationContext)
+                    // Obtenemos solo las lecturas NO sincronizadas
                     val readings = withContext(Dispatchers.IO) {
-                        db.sensorDao().getLastReadings()
+                        db.sensorDao().getUnsyncedReadings()
                     }
 
                     if (readings.isEmpty()) {
-                        Toast.makeText(requireContext(), "No hay datos en el celular. Usa el reloj primero.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Todos los datos ya están en Atlas.", Toast.LENGTH_LONG).show()
                     } else {
-                        var subidos = 0
-                        withContext(Dispatchers.IO) {
-                            val manager = MongoDBManager.getInstance()
-                            readings.forEach { 
-                                try {
-                                    manager.saveReading(it)
-                                    subidos++
-                                } catch (e: Exception) {
-                                    Log.e("Atlas", "Error en registro: ${e.message}")
+                        Log.d("Atlas", "Iniciando envío masivo de ${readings.size} registros...")
+                        
+                        val result = withContext(Dispatchers.IO) {
+                            try {
+                                val manager = MongoDBManager.getInstance()
+                                val isOk = manager.saveReadingsBulk(readings)
+                                if (isOk) {
+                                    readings.forEach { db.sensorDao().markAsSynced(it.id) }
+                                    "OK"
+                                } else {
+                                    "Error desconocido"
                                 }
+                            } catch (e: Exception) {
+                                Log.e("Atlas", "Excepción: ${e.message}")
+                                e.localizedMessage ?: "Error de red"
                             }
                         }
-                        if (subidos > 0) {
-                            Toast.makeText(requireContext(), "✅ $subidos registros guardados en Atlas", Toast.LENGTH_SHORT).show()
-                            Log.d("Atlas", "✅ ¡ÉXITO TOTAL! Revisa tu navegador.")
+                        
+                        if (result == "OK") {
+                            Toast.makeText(requireContext(), "✅ ¡Sincronizado con Atlas!", Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(requireContext(), "❌ Error de conexión. Revisa el Logcat.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "❌ Error: $result", Toast.LENGTH_LONG).show()
                         }
                     }
                 } catch (t: Throwable) {
                     Log.e("Atlas", "Error: ${t.message}")
+                    Toast.makeText(requireContext(), "Error al conectar con Atlas", Toast.LENGTH_LONG).show()
                 } finally {
                     binding.buttonTestMongo.isEnabled = true
                     binding.buttonTestMongo.text = "GUARDAR EN MONGO ATLAS"

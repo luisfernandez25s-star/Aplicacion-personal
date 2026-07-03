@@ -12,6 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+
 class WearableService : WearableListenerService() {
 
     private val serviceJob = SupervisorJob()
@@ -40,6 +43,10 @@ class WearableService : WearableListenerService() {
                 saveLocal("Ritmo Cardiaco", hr, 0f, 0f, timestamp)
                 saveLocal("Acelerómetro", ax, ay, az, timestamp)
                 saveLocal("Giroscopio", gx, gy, gz, timestamp)
+
+                // Disparar sincronización automática con Atlas
+                val syncRequest = OneTimeWorkRequestBuilder<SyncWorker>().build()
+                WorkManager.getInstance(applicationContext).enqueue(syncRequest)
             }
         }
     }
