@@ -31,7 +31,25 @@ class MainActivity : Activity(), SensorEventListener {
     private lateinit var tvAccel: TextView
     private lateinit var tvGyro: TextView
     
+    // Variables para guardar las últimas lecturas
+    private var lastHR = 0f
+    private var lastAccelX = 0f
+    private var lastAccelY = 0f
+    private var lastAccelZ = 0f
+    private var lastGyroX = 0f
+    private var lastGyroY = 0f
+    private var lastGyroZ = 0f
+
     private val handler = Handler(Looper.getMainLooper())
+    
+    // Tarea para enviar datos cada 10 segundos
+    private val sendDataRunnable = object : Runnable {
+        override fun run() {
+            sendAllDataToPhone()
+            handler.postDelayed(this, 10000) // 10 segundos
+        }
+    }
+
     private val checkNodesRunnable = object : Runnable {
         override fun run() {
             checkNodes()
@@ -91,70 +109,60 @@ class MainActivity : Activity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        val sensorName: String
-        val valX: Float
-        val valY: Float
-        val valZ: Float
-        
         when (event.sensor.type) {
             Sensor.TYPE_HEART_RATE -> {
-                sensorName = "Ritmo Cardiaco"
-                valX = event.values[0]
-                valY = 0f
-                valZ = 0f
-                tvHeartRate.text = getString(R.string.hr_label, valX.toString())
+                lastHR = event.values[0]
+                tvHeartRate.text = getString(R.string.hr_label, lastHR.toString())
             }
             Sensor.TYPE_ACCELEROMETER -> {
-                sensorName = "Acelerómetro"
-                valX = event.values[0]
-                valY = event.values[1]
-                valZ = event.values[2]
-                tvAccel.text = getString(R.string.accel_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", valX, valY, valZ))
+                lastAccelX = event.values[0]
+                lastAccelY = event.values[1]
+                lastAccelZ = event.values[2]
+                tvAccel.text = getString(R.string.accel_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", lastAccelX, lastAccelY, lastAccelZ))
             }
             Sensor.TYPE_GYROSCOPE -> {
-                sensorName = "Giroscopio"
-                valX = event.values[0]
-                valY = event.values[1]
-                valZ = event.values[2]
-                tvGyro.text = getString(R.string.gyro_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", valX, valY, valZ))
+                lastGyroX = event.values[0]
+                lastGyroY = event.values[1]
+                lastGyroZ = event.values[2]
+                tvGyro.text = getString(R.string.gyro_label, String.format(Locale.getDefault(), "%.2f, %.2f, %.2f", lastGyroX, lastGyroY, lastGyroZ))
             }
-            else -> return
         }
-        
-        sendDataToPhone(sensorName, valX, valY, valZ)
     }
 
-    private fun sendDataToPhone(sensorName: String, x: Float, y: Float, z: Float) {
+    private fun sendAllDataToPhone() {
+        // Enviamos las lecturas actuales (las 3 juntas para asegurar que lleguen)
+        sendSingleSensorToPhone("Ritmo Cardiaco", lastHR, 0f, 0f)
+        sendSingleSensorToPhone("Acelerómetro", lastAccelX, lastAccelY, lastAccelZ)
+        sendSingleSensorToPhone("Giroscopio", lastGyroX, lastGyroY, lastGyroZ)
+    }
+
+    private fun sendSingleSensorToPhone(sensorName: String, x: Float, y: Float, z: Float) {
         val dataClient = Wearable.getDataClient(this)
-        // RUTA ÚNICA POR MILISEGUNDO PARA FORZAR SINCRONIZACIÓN EN EMULADORES
-        val uniquePath = "/sensor_data/${System.currentTimeMillis()}"
+        // RUTA ÚNICA PARA FORZAR AL CELULAR A RECIBIR
+        val uniquePath = "/sensor_data/${sensorName.replace(" ", "_")}"
         val putDataMapReq = PutDataMapRequest.create(uniquePath)
+        
         putDataMapReq.dataMap.putString("sensor_name", sensorName)
         putDataMapReq.dataMap.putFloat("value_x", x)
         putDataMapReq.dataMap.putFloat("value_y", y)
         putDataMapReq.dataMap.putFloat("value_z", z)
         putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
-        // Fuerza bruta: Añadir un ID aleatorio para que el Data Layer siempre mande el dato
         putDataMapReq.dataMap.putLong("force_update", System.nanoTime())
         
         val putDataReq = putDataMapReq.asPutDataRequest()
         putDataReq.setUrgent()
         
-        Log.d("Wear", "Intentando enviar datos de $sensorName al celular...")
+        Log.d("Wear", "Enviando $sensorName al celular...")
         dataClient.putDataItem(putDataReq)
             .addOnSuccessListener { 
-                Log.d("Wear", "¡ÉXITO! Datos de $sensorName enviados al celular") 
+                Log.d("Wear", "Éxito: $sensorName enviado")
                 handler.post {
-                    tvStatus.text = "Enviando: $sensorName"
+                    tvStatus.text = "Sincronizado: ${System.currentTimeMillis() % 10000}"
                     tvStatus.setTextColor(Color.GREEN)
                 }
             }
             .addOnFailureListener { e -> 
-                Log.e("Wear", "ERROR: No se pudo enviar datos al celular", e)
-                handler.post {
-                    tvStatus.text = "Error de Envío"
-                    tvStatus.setTextColor(Color.RED)
-                }
+                Log.e("Wear", "Fallo al enviar $sensorName", e)
             }
     }
 
@@ -167,11 +175,13 @@ class MainActivity : Activity(), SensorEventListener {
             registerSensors()
         }
         handler.post(checkNodesRunnable)
+        handler.post(sendDataRunnable) // Iniciar bucle de 10 segundos
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
         handler.removeCallbacks(checkNodesRunnable)
+        handler.removeCallbacks(sendDataRunnable) // Detener bucle
     }
 }

@@ -43,7 +43,14 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
+        // Registrar escucha directa de datos del reloj
         Wearable.getDataClient(requireActivity()).addListener(this)
+        
+        binding.textviewReadings.text = "Buscando datos del reloj...\n(Asegúrate que el reloj diga 'Sincronizado')"
+
+        binding.buttonFirst.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
 
         binding.buttonTestMongo.setOnClickListener {
             val readingToSave = lastReading
@@ -82,9 +89,9 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
     }
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
+        Log.d("FirstFragment", "Recibidos ${dataEvents.count} eventos del reloj")
         for (event in dataEvents) {
             val path = event.dataItem.uri.path ?: ""
-            // FLEXIBILIDAD TOTAL: Capturar cualquier dato que contenga sensor_data
             if (event.type == DataEvent.TYPE_CHANGED && path.contains("sensor_data")) {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
                 val sensorName = dataMap.getString("sensor_name") ?: "Sensor"
@@ -96,7 +103,8 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
                 lastReading = SensorReading(sensorName = sensorName, valueX = x, valueY = y, valueZ = z, timestamp = time)
                 
                 activity?.runOnUiThread {
-                    binding.textviewReadings.text = "RECIBIDO: $sensorName\nX: $x, Y: $y, Z: $z\n(Listo para guardar)"
+                    val timestampStr = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
+                    binding.textviewReadings.text = "¡DATO RECIBIDO! ($timestampStr)\nSensor: $sensorName\nX: $x, Y: $y, Z: $z\n\nPresiona el botón de arriba para guardar en Atlas."
                 }
             }
         }
