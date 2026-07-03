@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="accel_default">Accel: --</string>
     <string name="accel_label">Acelerómetro: %s</string>
     <string name="app_name">Mi Aplicación Wear</string>
     <string name="connected">Conectado (Bluetooth/Red)</string>
+    <string name="gyro_default">Gyro: --</string>
     <string name="gyro_label">Giroscopio: %s</string>
+    <string name="hr_default">Ritmo: --</string>
     <string name="hr_label">Ritmo Cardíaco: %s</string>
+    <string name="init_status">Iniciando...</string>
+    <string name="monitor_title">MONITOR WEAR</string>
     <string name="no_connection">Buscando celular...</string>
     <string name="sending_status">Enviando datos...</string>
     <string name="waiting_status">Esperando sensores...</string>

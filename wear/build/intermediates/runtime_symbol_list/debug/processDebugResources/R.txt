@@ -367,6 +367,7 @@ int id tv_accel 0x7f080069
 int id tv_gyro 0x7f08006a
 int id tv_heart_rate 0x7f08006b
 int id tv_status 0x7f08006c
+int id tv_title 0x7f08008a
 int id view_tree_disjoint_parent 0x7f08006d
 int id view_tree_lifecycle_owner 0x7f08006e
 int id view_tree_saved_state_registry_owner 0x7f08006f
@@ -424,6 +425,7 @@ int layout ws_single_page_nav_drawer_7_item 0x7f0a0016
 int layout ws_single_page_nav_drawer_peek_view 0x7f0a0017
 int layout ws_single_page_nav_drawer_text 0x7f0a0018
 int layout ws_wearable_drawer_view 0x7f0a0019
+int string accel_default 0x7f0b0028
 int string accel_label 0x7f0b0000
 int string androidx_startup 0x7f0b0001
 int string app_name 0x7f0b0002
@@ -456,8 +458,12 @@ int string confirmation_overlay_a11y_description_fail 0x7f0b001c
 int string confirmation_overlay_a11y_description_phone 0x7f0b001d
 int string confirmation_overlay_a11y_description_success 0x7f0b001e
 int string connected 0x7f0b001f
+int string gyro_default 0x7f0b0029
 int string gyro_label 0x7f0b0020
+int string hr_default 0x7f0b002a
 int string hr_label 0x7f0b0021
+int string init_status 0x7f0b002b
+int string monitor_title 0x7f0b002c
 int string no_connection 0x7f0b0022
 int string sending_status 0x7f0b0023
 int string status_bar_notification_info_overflow 0x7f0b0024

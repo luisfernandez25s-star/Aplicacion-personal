@@ -175,6 +175,7 @@
     <item name="ws_navigation_drawer_view_pager" type="id"/>
     <integer name="google_play_services_version">12451000</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <string name="accel_default">Accel: --</string>
     <string name="accel_label">Acelerómetro: %s</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="app_name">Mi Aplicación Wear</string>
@@ -207,8 +208,12 @@
     <string name="confirmation_overlay_a11y_description_phone">Opened on your phone</string>
     <string name="confirmation_overlay_a11y_description_success">Success</string>
     <string name="connected">Conectado (Bluetooth/Red)</string>
+    <string name="gyro_default">Gyro: --</string>
     <string name="gyro_label">Giroscopio: %s</string>
+    <string name="hr_default">Ritmo: --</string>
     <string name="hr_label">Ritmo Cardíaco: %s</string>
+    <string name="init_status">Iniciando...</string>
+    <string name="monitor_title">MONITOR WEAR</string>
     <string name="no_connection">Buscando celular...</string>
     <string name="sending_status">Enviando datos...</string>
     <string name="status_bar_notification_info_overflow">999+</string>
