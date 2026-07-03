@@ -12,4 +12,5 @@
     <string name="accel_default">Accel: --</string>
     <string name="gyro_default">Gyro: --</string>
     <string name="init_status">Iniciando...</string>
+    <string name="btn_sync_text">FORZAR SINCRONIZACIÓN</string>
 </resources>

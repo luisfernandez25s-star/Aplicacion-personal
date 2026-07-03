@@ -17,11 +17,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-import com.google.android.gms.wearable.DataClient
-import com.google.android.gms.wearable.DataEvent
-import com.google.android.gms.wearable.DataEventBuffer
-import com.google.android.gms.wearable.DataMapItem
 import com.google.android.gms.wearable.Wearable
+import com.google.android.gms.wearable.DataMapItem
+import com.google.android.gms.wearable.DataEvent
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.wearable.DataClient
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -32,6 +33,20 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
     private val binding get() = _binding!!
     private var lastReading: SensorReading? = null
 
+    override fun onDataChanged(dataEvents: com.google.android.gms.wearable.DataEventBuffer) {
+        Log.d("FirstFragment", "onDataChanged local disparado: ${dataEvents.count}")
+        for (event in dataEvents) {
+            if (event.type == DataEvent.TYPE_CHANGED && event.dataItem.uri.path == "/sensor_data") {
+                val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
+                val hr = dataMap.getFloat("hr")
+                
+                lifecycleScope.launch(Dispatchers.Main) {
+                    binding.titleText.text = "Reloj: HR $hr recibida"
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,79 +55,160 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        try {
+            Wearable.getDataClient(requireActivity()).addListener(this)
+        } catch (e: Exception) {
+            Log.e("FirstFragment", "Error al añadir listener: ${e.message}")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        try {
+            Wearable.getDataClient(requireActivity()).removeListener(this)
+        } catch (e: Exception) {
+            Log.e("FirstFragment", "Error al quitar listener: ${e.message}")
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        // Registrar escucha directa de datos del reloj
-        Wearable.getDataClient(requireActivity()).addListener(this)
+        // Verificar Google Play Services
+        val availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(requireContext())
+        if (availability != ConnectionResult.SUCCESS) {
+            binding.titleText.text = "Google Play Services: ERROR ($availability)"
+            binding.titleText.setTextColor(android.graphics.Color.RED)
+        }
         
-        binding.textviewReadings.text = "Buscando datos del reloj...\n(Asegúrate que el reloj diga 'Sincronizado')"
+        binding.textviewReadings.text = "Buscando datos en la base de datos..."
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        binding.buttonTestMongo.setOnClickListener {
-            val readingToSave = lastReading
-            if (readingToSave == null) {
-                Toast.makeText(requireContext(), "No hay datos del reloj para guardar aún", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
+        binding.buttonSimulate.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                binding.buttonTestMongo.isEnabled = false
-                binding.buttonTestMongo.text = "GUARDANDO..."
+                val simReading = SensorReading(
+                    sensorName = "SIMULADO",
+                    valueX = (60..100).random().toFloat(),
+                    valueY = 0f,
+                    valueZ = 0f,
+                    timestamp = System.currentTimeMillis()
+                )
+                AppDatabase.getDatabase(requireContext().applicationContext).sensorDao().insert(simReading)
+                Toast.makeText(requireContext(), "Dato simulado guardado", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.buttonClearDb.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                AppDatabase.getDatabase(requireContext().applicationContext).sensorDao().deleteAll()
+                Toast.makeText(requireContext(), "Vista limpiada", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.buttonTestMongo.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    withContext(Dispatchers.IO) {
-                        MongoDBManager.getInstance().saveReading(readingToSave)
+                    binding.buttonTestMongo.isEnabled = false
+                    binding.buttonTestMongo.text = "SUBIENDO..."
+                    
+                    val db = AppDatabase.getDatabase(requireContext().applicationContext)
+                    val readings = withContext(Dispatchers.IO) {
+                        db.sensorDao().getLastReadings()
                     }
-                    Toast.makeText(requireContext(), "¡Guardado en Atlas exitosamente!", Toast.LENGTH_SHORT).show()
-                } catch (e: Throwable) {
-                    Log.e("FirstFragment", "Error Atlas: ${e.message}")
-                    Toast.makeText(requireContext(), "Error al conectar con Atlas", Toast.LENGTH_LONG).show()
+
+                    if (readings.isEmpty()) {
+                        Toast.makeText(requireContext(), "No hay datos en el celular. Usa el reloj primero.", Toast.LENGTH_LONG).show()
+                    } else {
+                        var subidos = 0
+                        withContext(Dispatchers.IO) {
+                            val manager = MongoDBManager.getInstance()
+                            readings.forEach { 
+                                try {
+                                    manager.saveReading(it)
+                                    subidos++
+                                } catch (e: Exception) {
+                                    Log.e("Atlas", "Error en registro: ${e.message}")
+                                }
+                            }
+                        }
+                        if (subidos > 0) {
+                            Toast.makeText(requireContext(), "✅ $subidos registros guardados en Atlas", Toast.LENGTH_SHORT).show()
+                            Log.d("Atlas", "✅ ¡ÉXITO TOTAL! Revisa tu navegador.")
+                        } else {
+                            Toast.makeText(requireContext(), "❌ Error de conexión. Revisa el Logcat.", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                } catch (t: Throwable) {
+                    Log.e("Atlas", "Error: ${t.message}")
                 } finally {
                     binding.buttonTestMongo.isEnabled = true
-                    binding.buttonTestMongo.text = getString(R.string.test_atlas)
+                    binding.buttonTestMongo.text = "GUARDAR EN MONGO ATLAS"
                 }
             }
         }
 
+        // Observar la base de datos para mostrar los datos agrupados por sensor
         val database = AppDatabase.getDatabase(requireContext())
         viewLifecycleOwner.lifecycleScope.launch {
             database.sensorDao().getAllReadings().collect { readings ->
-                val text = readings.take(20).joinToString("\n") { 
-                    "${it.sensorName}: [${it.valueX}, ${it.valueY}, ${it.valueZ}] (${it.timestamp})"
+                if (readings.isNotEmpty()) {
+                    // Agrupamos por nombre de sensor para que se vea ordenado
+                    val grouped = readings.groupBy { it.sensorName }
+                    
+                    val summaryText = StringBuilder()
+                    grouped.forEach { (name, sensorReadings) ->
+                        val last = sensorReadings.first()
+                        val date = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date(last.timestamp))
+                        
+                        summaryText.append("🔴 $name (Último: $date)\n")
+                        if (name == "Ritmo Cardiaco" || name == "SIMULADO") {
+                            summaryText.append("   VALOR: ${last.valueX} BPM\n")
+                        } else {
+                            summaryText.append("   X: ${last.valueX}, Y: ${last.valueY}, Z: ${last.valueZ}\n")
+                        }
+                        summaryText.append("----------------------------\n")
+                    }
+                    
+                    binding.textviewReadings.text = summaryText.toString()
+                } else {
+                    binding.textviewReadings.text = getString(R.string.no_readings)
                 }
-                binding.textviewReadings.text = if (text.isEmpty()) getString(R.string.no_readings) else text
             }
         }
+        
+        // Verificar conexión con el reloj periódicamente (cada 3 segundos)
+        startConnectionCheckLoop()
     }
 
-    override fun onDataChanged(dataEvents: DataEventBuffer) {
-        Log.d("FirstFragment", "Recibidos ${dataEvents.count} eventos del reloj")
-        for (event in dataEvents) {
-            val path = event.dataItem.uri.path ?: ""
-            if (event.type == DataEvent.TYPE_CHANGED && path.contains("sensor_data")) {
-                val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-                val sensorName = dataMap.getString("sensor_name") ?: "Sensor"
-                val x = dataMap.getFloat("value_x")
-                val y = dataMap.getFloat("value_y")
-                val z = dataMap.getFloat("value_z")
-                val time = dataMap.getLong("timestamp")
-                
-                lastReading = SensorReading(sensorName = sensorName, valueX = x, valueY = y, valueZ = z, timestamp = time)
-                
-                activity?.runOnUiThread {
-                    val timestampStr = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
-                    binding.textviewReadings.text = "¡DATO RECIBIDO! ($timestampStr)\nSensor: $sensorName\nX: $x, Y: $y, Z: $z\n\nPresiona el botón de arriba para guardar en Atlas."
+    private fun startConnectionCheckLoop() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            while (true) {
+                try {
+                    val nodes = withContext(Dispatchers.IO) {
+                        com.google.android.gms.tasks.Tasks.await(Wearable.getNodeClient(requireActivity()).connectedNodes)
+                    }
+                    if (nodes.isEmpty()) {
+                        binding.titleText.text = "Estado: Reloj Desconectado ❌"
+                        binding.titleText.setTextColor(android.graphics.Color.RED)
+                    } else {
+                        binding.titleText.text = "Estado: Reloj Conectado ✅"
+                        binding.titleText.setTextColor(android.graphics.Color.parseColor("#006400")) // Verde oscuro
+                    }
+                } catch (e: Exception) {
+                    Log.e("FirstFragment", "Error al verificar nodos", e)
                 }
+                kotlinx.coroutines.delay(3000) // Esperar 3 segundos
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Wearable.getDataClient(requireActivity()).removeListener(this)
         _binding = null
     }
 }

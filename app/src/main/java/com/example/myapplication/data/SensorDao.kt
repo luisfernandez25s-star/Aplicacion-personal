@@ -12,4 +12,10 @@ interface SensorDao {
 
     @Query("SELECT * FROM sensor_readings ORDER BY timestamp DESC")
     fun getAllReadings(): Flow<List<SensorReading>>
+
+    @Query("SELECT * FROM sensor_readings ORDER BY timestamp DESC LIMIT 20")
+    suspend fun getLastReadings(): List<SensorReading>
+
+    @Query("DELETE FROM sensor_readings")
+    suspend fun deleteAll()
 }

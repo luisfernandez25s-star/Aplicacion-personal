@@ -28,9 +28,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/test_atlas"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_simulate"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_text" />
+
+        <Button
+            android:id="@+id/button_simulate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SIMULAR DATO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_test_mongo"
+            app:layout_constraintTop_toTopOf="@+id/button_test_mongo" />
+
+        <Button
+            android:id="@+id/button_clear_db"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BORRAR VISTA"
+            android:textColor="#F44336"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_simulate" />
 
         <TextView
             android:id="@+id/label_readings"

@@ -18,44 +18,46 @@ class WearableService : WearableListenerService() {
     private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
-        Log.d("WearableService", "Evento de datos recibido: ${dataEvents.count} eventos")
         for (event in dataEvents) {
             val path = event.dataItem.uri.path ?: ""
-            // FLEXIBILIDAD TOTAL PARA RECEPCIÓN
-            if (event.type == DataEvent.TYPE_CHANGED && path.contains("sensor_data")) {
+            
+            if (event.type == DataEvent.TYPE_CHANGED && path == "/sensor_data") {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-                val sensorName = dataMap.getString("sensor_name") ?: "Unknown"
-                val valX = dataMap.getFloat("value_x")
-                val valY = dataMap.getFloat("value_y")
-                val valZ = dataMap.getFloat("value_z")
+                
+                val hr = dataMap.getFloat("hr")
+                val ax = dataMap.getFloat("ax")
+                val ay = dataMap.getFloat("ay")
+                val az = dataMap.getFloat("az")
+                val gx = dataMap.getFloat("gx")
+                val gy = dataMap.getFloat("gy")
+                val gz = dataMap.getFloat("gz")
                 val timestamp = dataMap.getLong("timestamp")
 
-                saveToDatabase(sensorName, valX, valY, valZ, timestamp)
+                Log.d("WearableService", "Datos recibidos. Guardando LOCALMENTE.")
+
+                // Solo guardamos localmente en Room. 
+                // El envío a Atlas lo hará el usuario desde el botón en el celular.
+                saveLocal("Ritmo Cardiaco", hr, 0f, 0f, timestamp)
+                saveLocal("Acelerómetro", ax, ay, az, timestamp)
+                saveLocal("Giroscopio", gx, gy, gz, timestamp)
             }
         }
     }
 
-    private fun saveToDatabase(name: String, valX: Float, valY: Float, valZ: Float, timestamp: Long) {
+    private fun saveLocal(name: String, valX: Float, valY: Float, valZ: Float, timestamp: Long) {
         serviceScope.launch {
-            val reading = SensorReading(
-                sensorName = name,
-                valueX = valX,
-                valueY = valY,
-                valueZ = valZ,
-                timestamp = timestamp
-            )
-            
-            // Guardar localmente en Room para que el historial se mantenga
             try {
-                val database = AppDatabase.getDatabase(applicationContext)
-                database.sensorDao().insert(reading)
-                Log.d("WearableService", "Dato guardado localmente: $name")
+                val reading = SensorReading(
+                    sensorName = name,
+                    valueX = valX,
+                    valueY = valY,
+                    valueZ = valZ,
+                    timestamp = timestamp
+                )
+                AppDatabase.getDatabase(applicationContext).sensorDao().insert(reading)
             } catch (e: Exception) {
                 Log.e("WearableService", "Error local: ${e.message}")
             }
-
-            // NOTA: Ya NO se guarda en Atlas automáticamente aquí.
-            // Se guarda solo cuando el usuario pulsa el botón en FirstFragment.
         }
     }
 

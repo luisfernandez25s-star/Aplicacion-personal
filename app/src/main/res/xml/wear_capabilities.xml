@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <capability name="receive_sensor_data">
+        <item>@string/app_name</item>
+    </capability>
+</resources>

@@ -30,6 +30,7 @@ class MainActivity : Activity(), SensorEventListener {
     private lateinit var tvHeartRate: TextView
     private lateinit var tvAccel: TextView
     private lateinit var tvGyro: TextView
+    private lateinit var btnSync: android.widget.Button
     
     // Variables para guardar las últimas lecturas
     private var lastHR = 0f
@@ -42,11 +43,11 @@ class MainActivity : Activity(), SensorEventListener {
 
     private val handler = Handler(Looper.getMainLooper())
     
-    // Tarea para enviar datos cada 10 segundos
+    // Tarea para enviar datos cada 5 segundos
     private val sendDataRunnable = object : Runnable {
         override fun run() {
             sendAllDataToPhone()
-            handler.postDelayed(this, 10000) // 10 segundos
+            handler.postDelayed(this, 5000) // 5 segundos
         }
     }
 
@@ -66,6 +67,11 @@ class MainActivity : Activity(), SensorEventListener {
         tvHeartRate = findViewById(R.id.tv_heart_rate)
         tvAccel = findViewById(R.id.tv_accel)
         tvGyro = findViewById(R.id.tv_gyro)
+        btnSync = findViewById(R.id.btn_sync)
+
+        btnSync.setOnClickListener {
+            sendAllDataToPhone()
+        }
 
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         heartRateSensor = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE)
@@ -85,6 +91,22 @@ class MainActivity : Activity(), SensorEventListener {
             registerSensors()
         }
         checkNodes()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d("Wear", "Permiso concedido, registrando sensores")
+            registerSensors()
+        } else {
+            Log.w("Wear", "Permiso denegado")
+            tvStatus.text = "Permiso Denegado"
+            tvStatus.setTextColor(Color.RED)
+        }
     }
 
     private fun checkNodes() {
@@ -130,39 +152,41 @@ class MainActivity : Activity(), SensorEventListener {
     }
 
     private fun sendAllDataToPhone() {
-        // Enviamos las lecturas actuales (las 3 juntas para asegurar que lleguen)
-        sendSingleSensorToPhone("Ritmo Cardiaco", lastHR, 0f, 0f)
-        sendSingleSensorToPhone("Acelerómetro", lastAccelX, lastAccelY, lastAccelZ)
-        sendSingleSensorToPhone("Giroscopio", lastGyroX, lastGyroY, lastGyroZ)
-    }
-
-    private fun sendSingleSensorToPhone(sensorName: String, x: Float, y: Float, z: Float) {
         val dataClient = Wearable.getDataClient(this)
-        // RUTA ÚNICA PARA FORZAR AL CELULAR A RECIBIR
-        val uniquePath = "/sensor_data/${sensorName.replace(" ", "_")}"
-        val putDataMapReq = PutDataMapRequest.create(uniquePath)
+        val putDataMapReq = PutDataMapRequest.create("/sensor_data")
         
-        putDataMapReq.dataMap.putString("sensor_name", sensorName)
-        putDataMapReq.dataMap.putFloat("value_x", x)
-        putDataMapReq.dataMap.putFloat("value_y", y)
-        putDataMapReq.dataMap.putFloat("value_z", z)
+        // Enviamos todo en un solo mapa para mayor eficiencia
+        putDataMapReq.dataMap.putFloat("hr", lastHR)
+        putDataMapReq.dataMap.putFloat("ax", lastAccelX)
+        putDataMapReq.dataMap.putFloat("ay", lastAccelY)
+        putDataMapReq.dataMap.putFloat("az", lastAccelZ)
+        putDataMapReq.dataMap.putFloat("gx", lastGyroX)
+        putDataMapReq.dataMap.putFloat("gy", lastGyroY)
+        putDataMapReq.dataMap.putFloat("gz", lastGyroZ)
         putDataMapReq.dataMap.putLong("timestamp", System.currentTimeMillis())
-        putDataMapReq.dataMap.putLong("force_update", System.nanoTime())
+        
+        // Importante: forzar cambio para que onDataChanged se dispare siempre
+        putDataMapReq.dataMap.putLong("sync_id", System.nanoTime())
         
         val putDataReq = putDataMapReq.asPutDataRequest()
         putDataReq.setUrgent()
         
-        Log.d("Wear", "Enviando $sensorName al celular...")
+        Log.d("Wear", "Sincronizando todos los sensores...")
         dataClient.putDataItem(putDataReq)
             .addOnSuccessListener { 
-                Log.d("Wear", "Éxito: $sensorName enviado")
+                Log.d("Wear", "Sincronización exitosa")
                 handler.post {
-                    tvStatus.text = "Sincronizado: ${System.currentTimeMillis() % 10000}"
+                    val time = java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(java.util.Date())
+                    tvStatus.text = "Sincronizado: $time"
                     tvStatus.setTextColor(Color.GREEN)
                 }
             }
             .addOnFailureListener { e -> 
-                Log.e("Wear", "Fallo al enviar $sensorName", e)
+                Log.e("Wear", "Fallo al sincronizar", e)
+                handler.post {
+                    tvStatus.text = "Error de Sincronización"
+                    tvStatus.setTextColor(Color.RED)
+                }
             }
     }
 
@@ -175,7 +199,7 @@ class MainActivity : Activity(), SensorEventListener {
             registerSensors()
         }
         handler.post(checkNodesRunnable)
-        handler.post(sendDataRunnable) // Iniciar bucle de 10 segundos
+        handler.post(sendDataRunnable) // Iniciar bucle de 5 segundos
     }
 
     override fun onPause() {
