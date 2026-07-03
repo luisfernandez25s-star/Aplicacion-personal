@@ -2,12 +2,12 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="app">
+      <SelectionState runConfigName="wear">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-07-03T05:41:05.254998400Z">
+        <DropdownSelection timestamp="2026-07-03T17:21:37.917783700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\fluis_nuf\.android\avd\Pixel_6_2.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\LAB DESARROLLO 01\.android\avd\Wear_OS_Small_Round_2.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -26,12 +26,12 @@
           </targets>
         </DialogSelection>
       </SelectionState>
-      <SelectionState runConfigName="wear">
+      <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-07-03T05:43:41.969714100Z">
+        <DropdownSelection timestamp="2026-07-03T18:02:54.395961700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\fluis_nuf\.android\avd\Wear_OS_Small_Round_2.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=qoirdqxcnrcqirv8" />
             </handle>
           </Target>
         </DropdownSelection>

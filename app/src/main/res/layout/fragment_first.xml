@@ -25,33 +25,100 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_connection_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sincronización con Atlas"
+            android:text="MongoDB: Desconectado"
             android:textColor="#E3F2FD"
             android:textSize="12sp" />
     </LinearLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_readings"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:cardBackgroundColor="#1A1A1A"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_test_mongo"
+        app:layout_constraintBottom_toTopOf="@+id/btn_import_uri"
         app:layout_constraintTop_toBottomOf="@id/header">
 
-        <TextView
-            android:id="@+id/textview_readings"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Esperando datos..."
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:lineSpacingExtra="4dp" />
-    </com.google.android.material.card.MaterialCardView>
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DATOS EN TIEMPO REAL"
+                        android:textColor="#2196F3"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_realtime_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Esperando datos del reloj..."
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COLA LOCAL"
+                        android:textColor="#2196F3"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textview_readings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="No hay datos en cola"
+                        android:textColor="#BDBDBD"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_import_uri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="IMPORTAR CONFIGURACIÓN (.env)"
+        android:backgroundTint="#424242"
+        app:layout_constraintBottom_toTopOf="@+id/button_test_mongo" />
 
     <Button
         android:id="@+id/button_test_mongo"
@@ -60,7 +127,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#2196F3"
-        android:text="GUARDAR EN ATLAS"
+        android:text="SUBIR A MONGO ATLAS"
         android:textStyle="bold"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button_first" />
@@ -74,27 +141,5 @@
         android:text="VER HISTORIAL COMPLETO"
         android:textColor="#BDBDBD"
         app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/button_simulate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="SIMULAR"
-        android:textSize="10sp"
-        android:backgroundTint="#424242"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button_clear_db"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="LIMPIAR"
-        android:textSize="10sp"
-        android:backgroundTint="#424242"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

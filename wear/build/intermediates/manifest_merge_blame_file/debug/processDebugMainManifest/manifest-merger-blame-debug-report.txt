@@ -5,206 +5,236 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-7-->INJECTED
 8        android:minSdkVersion="30"
-8-->INJECTED
-9        android:targetSdkVersion="37" />
-9-->INJECTED
+9        android:targetSdkVersion="35" />
 10
 11    <uses-feature android:name="android.hardware.type.watch" />
-11-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:4:5-64
-11-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:4:19-61
+11-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:4:5-64
+11-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:4:19-61
 12
 13    <uses-permission android:name="android.permission.BODY_SENSORS" />
-13-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:6:5-71
-13-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:6:22-68
-14    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-14-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:5-79
-14-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:22-76
-15    <uses-permission android:name="android.permission.BLUETOOTH" />
-15-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:5-68
-15-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:22-65
-16    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-16-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:5-74
-16-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:22-71
-17    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-17-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:5-73
-17-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:22-70
-18    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-18-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:5-76
-18-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:22-73
-19    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-19-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:5-77
-19-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:22-74
-20    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
-20-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:5-94
-20-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:22-91
-21    <uses-permission android:name="android.permission.WAKE_LOCK" />
-21-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:14:5-68
-21-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:14:22-65
-22
-23    <queries>
-23-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:19:5-21:15
-24        <package android:name="com.google.android.wearable.healthservices" />
-24-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:20:9-78
-24-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:20:18-75
-25    </queries>
-26
-27    <permission
-27-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:22:5-24:47
-28        android:name="com.example.myapplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-28-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:23:9-81
-29        android:protectionLevel="signature" />
-29-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:24:9-44
-30
-31    <uses-permission android:name="com.example.myapplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-31-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:26:5-97
-31-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:26:22-94
+13-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:6:5-71
+13-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:6:22-68
+14    <uses-permission android:name="android.permission.BODY_SENSORS_BACKGROUND" />
+14-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:5-82
+14-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:7:22-79
+15    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+15-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:5-79
+15-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:8:22-76
+16    <uses-permission android:name="android.permission.BLUETOOTH" />
+16-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:5-68
+16-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:9:22-65
+17    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+17-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:5-74
+17-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:10:22-71
+18    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+18-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:5-73
+18-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:11:22-70
+19    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+19-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:5-76
+19-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:12:22-73
+20    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+20-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:5-77
+20-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:13:22-74
+21    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+21-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:14:5-94
+21-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:14:22-91
+22    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+22-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:5-77
+22-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:15:22-74
+23    <uses-permission android:name="android.permission.WAKE_LOCK" />
+23-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:5-68
+23-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:22-65
+24
+25    <queries>
+25-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:19:5-21:15
+26        <package android:name="com.google.android.wearable.healthservices" />
+26-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:20:9-78
+26-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:20:18-75
+27    </queries>
+28
+29    <permission
+29-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+30        android:name="com.example.myapplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+30-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+31        android:protectionLevel="signature" />
+31-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
 32
-33    <application
-33-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:16:5-40:19
-34        android:allowBackup="true"
-34-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:9-35
-35        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-35-->[androidx.core:core:1.19.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\6968753b963e5e6dad276d8fb55b6eae\transformed\core-1.19.0\AndroidManifest.xml:28:18-86
-36        android:debuggable="true"
-37        android:extractNativeLibs="false"
-37-->INJECTED
-38        android:label="@string/app_name"
-38-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:18:9-41
-39        android:supportsRtl="true"
-39-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-35
-40        android:testOnly="true"
-41        android:theme="@android:style/Theme.DeviceDefault" >
-41-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:9-59
-42        <uses-library
-42-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:22:9-24:40
-43            android:name="com.google.android.wearable"
-43-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:13-55
-44            android:required="false" />
-44-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:24:13-37
-45
-46        <activity
-46-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:26:9-33:20
-47            android:name="com.example.myapplication.MainActivity"
-47-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:27:13-41
-48            android:exported="true" >
-48-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:28:13-36
-49            <intent-filter>
-49-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:29:13-32:29
-50                <action android:name="android.intent.action.MAIN" />
-50-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:30:17-69
-50-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:30:25-66
-51
-52                <category android:name="android.intent.category.LAUNCHER" />
-52-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:31:17-77
-52-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:31:27-74
-53            </intent-filter>
-54        </activity>
-55
-56        <service
-56-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:35:9-39:63
-57            android:name="com.example.myapplication.service.SensorService"
-57-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:36:13-50
-58            android:enabled="true"
-58-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:37:13-35
-59            android:exported="false"
-59-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:38:13-37
-60            android:foregroundServiceType="connectedDevice" />
-60-->C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:39:13-60
-61
-62        <uses-library
-62-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f22a2259806c4ea6647b5b09214537ca\transformed\wear-1.4.0\AndroidManifest.xml:26:9-28:40
-63            android:name="wear-sdk"
-63-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f22a2259806c4ea6647b5b09214537ca\transformed\wear-1.4.0\AndroidManifest.xml:27:13-36
-64            android:required="false" />
-64-->[androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f22a2259806c4ea6647b5b09214537ca\transformed\wear-1.4.0\AndroidManifest.xml:28:13-37
-65
-66        <service
-66-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:24:9-31:19
-67            android:name="androidx.health.services.client.VersionApiService"
-67-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:25:13-77
-68            android:exported="true"
-68-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:26:13-36
-69            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
-69-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:27:13-108
-70            <intent-filter>
-70-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:28:13-30:29
-71                <action android:name="hs.versionclient.BIND" />
-71-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:17-64
-71-->[androidx.health:health-services-client:1.0.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\f7a164c1e368bd3ef9333feb1710e4cf\transformed\health-services-client-1.0.0\AndroidManifest.xml:29:25-61
-72            </intent-filter>
-73        </service>
-74
-75        <activity
-75-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\83f479c62556315ee100ba493b061958\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
-76            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-76-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\83f479c62556315ee100ba493b061958\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
-77            android:exported="false"
-77-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\83f479c62556315ee100ba493b061958\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
-78            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-78-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\83f479c62556315ee100ba493b061958\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
-79
-80        <meta-data
-80-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\e57838c5308e3724baef302c56a379f5\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
-81            android:name="com.google.android.gms.version"
-81-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\e57838c5308e3724baef302c56a379f5\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
-82            android:value="@integer/google_play_services_version" />
-82-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\e57838c5308e3724baef302c56a379f5\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
-83
-84        <provider
-84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
-85            android:name="androidx.startup.InitializationProvider"
-85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
-86            android:authorities="com.example.myapplication.androidx-startup"
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
-87            android:exported="false" >
-87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
-88            <meta-data
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-89                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-90                android:value="androidx.startup" />
-90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-91        </provider>
-92
-93        <receiver
-93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-94            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-95            android:directBootAware="false"
-95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-96            android:enabled="true"
-96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-97            android:exported="true"
-97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-98            android:permission="android.permission.DUMP" >
-98-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-99            <intent-filter>
-99-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-100                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-101            </intent-filter>
-102            <intent-filter>
-102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-103                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
-104            </intent-filter>
-105            <intent-filter>
-105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-106                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
-107            </intent-filter>
-108            <intent-filter>
-108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-109                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\14c3562bd36c99264da8b346a7dfe994\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-110            </intent-filter>
-111        </receiver>
-112    </application>
-113
-114</manifest>
+33    <uses-permission android:name="com.example.myapplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+33-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+33-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+34
+35    <application
+35-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:18:5-51:19
+36        android:name="com.example.myapplication.wear.WearApplication"
+36-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-40
+37        android:allowBackup="true"
+37-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:9-35
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.15.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\ebc5c6c6e4fff2577c8e495cca518225\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
+39        android:debuggable="true"
+40        android:extractNativeLibs="false"
+41        android:label="@string/app_name"
+41-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:9-41
+42        android:supportsRtl="true"
+42-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:22:9-35
+43        android:testOnly="true"
+44        android:theme="@style/Theme.MyApplication" >
+44-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:23:9-51
+45        <uses-library
+45-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:25:9-27:40
+46            android:name="com.google.android.wearable"
+46-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:26:13-55
+47            android:required="false" />
+47-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:27:13-37
+48
+49        <activity
+49-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:29:9-36:20
+50            android:name="com.example.myapplication.wear.MainActivity"
+50-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:30:13-41
+51            android:exported="true" >
+51-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:31:13-36
+52            <intent-filter>
+52-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:32:13-35:29
+53                <action android:name="android.intent.action.MAIN" />
+53-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:33:17-69
+53-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:33:25-66
+54
+55                <category android:name="android.intent.category.LAUNCHER" />
+55-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:34:17-77
+55-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:34:27-74
+56            </intent-filter>
+57        </activity>
+58
+59        <meta-data
+59-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:38:9-40:57
+60            android:name="com.google.android.wearable.CAPABILITIES"
+60-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:39:13-68
+61            android:resource="@xml/wear_capabilities" />
+61-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:40:13-54
+62
+63        <service
+63-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:42:9-46:63
+64            android:name="com.example.myapplication.wear.service.WearSensorService"
+64-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:43:13-54
+65            android:enabled="true"
+65-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:44:13-35
+66            android:exported="false"
+66-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:45:13-37
+67            android:foregroundServiceType="connectedDevice" />
+67-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:46:13-60
+68
+69        <meta-data
+69-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:48:9-50:36
+70            android:name="com.google.android.wearable.standalone"
+70-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:49:13-66
+71            android:value="true" />
+71-->C:\Users\LAB DESARROLLO 01\StudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:50:13-33
+72
+73        <uses-library
+73-->[androidx.wear:wear:1.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\afda89a715026913ac2445ecce6536d3\transformed\wear-1.4.0\AndroidManifest.xml:26:9-28:40
+74            android:name="wear-sdk"
+74-->[androidx.wear:wear:1.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\afda89a715026913ac2445ecce6536d3\transformed\wear-1.4.0\AndroidManifest.xml:27:13-36
+75            android:required="false" />
+75-->[androidx.wear:wear:1.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\afda89a715026913ac2445ecce6536d3\transformed\wear-1.4.0\AndroidManifest.xml:28:13-37
+76
+77        <activity
+77-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\a3d587cfadbb80b0c33e55305eb71cd6\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+78            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+78-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\a3d587cfadbb80b0c33e55305eb71cd6\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+79            android:exported="false"
+79-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\a3d587cfadbb80b0c33e55305eb71cd6\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+80            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+80-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\a3d587cfadbb80b0c33e55305eb71cd6\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+81
+82        <service
+82-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:24:9-31:19
+83            android:name="androidx.health.services.client.VersionApiService"
+83-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:25:13-77
+84            android:exported="true"
+84-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:26:13-36
+85            android:permission="com.google.android.wearable.healthservices.permission.PASSIVE_DATA_BINDING" >
+85-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:27:13-108
+86            <intent-filter>
+86-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:28:13-30:29
+87                <action android:name="hs.versionclient.BIND" />
+87-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:29:17-64
+87-->[androidx.health:health-services-client:1.0.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\f2b5b534ffdf1ed6813b1f03b87ba3c3\transformed\jetified-health-services-client-1.0.0\AndroidManifest.xml:29:25-61
+88            </intent-filter>
+89        </service>
+90
+91        <provider
+91-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+92            android:name="androidx.startup.InitializationProvider"
+92-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+93            android:authorities="com.example.myapplication.androidx-startup"
+93-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+94            android:exported="false" >
+94-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+95            <meta-data
+95-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+96                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+96-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+97                android:value="androidx.startup" />
+97-->[androidx.emoji2:emoji2:1.2.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\75e7c0e06f45ed8bcd41244292bcc9c9\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+98            <meta-data
+98-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\9ce1a2ff95c3117271d132b2da20704e\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+99                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+99-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\9ce1a2ff95c3117271d132b2da20704e\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+100                android:value="androidx.startup" />
+100-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\9ce1a2ff95c3117271d132b2da20704e\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+101            <meta-data
+101-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+102                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+102-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+103                android:value="androidx.startup" />
+103-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+104        </provider>
+105
+106        <meta-data
+106-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\2082fbd74b9d0c0895609fde7ae64e8b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+107            android:name="com.google.android.gms.version"
+107-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\2082fbd74b9d0c0895609fde7ae64e8b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+108            android:value="@integer/google_play_services_version" />
+108-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\2082fbd74b9d0c0895609fde7ae64e8b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+109
+110        <receiver
+110-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+111            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+111-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+112            android:directBootAware="false"
+112-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+113            android:enabled="true"
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+114            android:exported="true"
+114-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+115            android:permission="android.permission.DUMP" >
+115-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+116            <intent-filter>
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+117                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+117-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+118            </intent-filter>
+119            <intent-filter>
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+120                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+120-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+121            </intent-filter>
+122            <intent-filter>
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+123                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+123-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+124            </intent-filter>
+125            <intent-filter>
+125-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+126                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+126-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\LAB DESARROLLO 01\.gradle\caches\9.4.1\transforms\5f9449816d20f6c8d106498e0edd7001\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+127            </intent-filter>
+128        </receiver>
+129    </application>
+130
+131</manifest>

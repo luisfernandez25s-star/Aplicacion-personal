@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 id btn_sync
+id sw_simulate
 id tv_accel
 id tv_gyro
 id tv_heart_rate
@@ -20,3 +21,5 @@ string monitor_title
 string no_connection
 string sending_status
 string waiting_status
+style Theme.MyApplication
+xml wear_capabilities

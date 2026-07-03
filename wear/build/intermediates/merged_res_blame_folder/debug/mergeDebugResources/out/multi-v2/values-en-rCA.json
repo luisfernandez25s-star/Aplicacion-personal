@@ -1,27 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.myapplication.wear-mergeDebugResources-21:/values-en-rCA/values-en-rCA.xml",
+            "outputFile": "com.example.myapplication.wear-mergeDebugResources-38:/values-en-rCA/values-en-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\fluis_nuf\\.gradle\\caches\\9.4.1\\transforms\\6968753b963e5e6dad276d8fb55b6eae\\transformed\\core-1.19.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\f7a7e2aea132ce4150d21a579ae7a902\\transformed\\appcompat-1.6.1\\res\\values-en-rCA\\values-en-rCA.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,151,253,352,451,555,657,773",
-                        "endColumns": "95,101,98,98,103,101,115,100",
-                        "endOffsets": "146,248,347,446,550,652,768,869"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,794,869,960,1053,1148,1242,1342,1435,1530,1624,1715,1806,1888,1991,2094,2193,2298,2402,2506,2662,2762",
+                        "endColumns": "103,99,107,83,99,114,77,74,90,92,94,93,99,92,94,93,90,90,81,102,102,98,104,103,103,155,99,82",
+                        "endOffsets": "204,304,412,496,596,711,789,864,955,1048,1143,1237,1337,1430,1525,1619,1710,1801,1883,1986,2089,2188,2293,2397,2501,2657,2757,2840"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,12",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,151,253,352,451,555,657,1117",
-                        "endColumns": "95,101,98,98,103,101,115,100",
-                        "endOffsets": "146,248,347,446,550,652,768,1213"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,39",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,794,869,960,1053,1148,1242,1342,1435,1530,1624,1715,1806,1888,1991,2094,2193,2298,2402,2506,2662,3824",
+                        "endColumns": "103,99,107,83,99,114,77,74,90,92,94,93,99,92,94,93,90,90,81,102,102,98,104,103,103,155,99,82",
+                        "endOffsets": "204,304,412,496,596,711,789,864,955,1048,1143,1237,1337,1430,1525,1619,1710,1801,1883,1986,2089,2188,2293,2397,2501,2657,2757,3902"
                     }
                 },
                 {
-                    "source": "C:\\Users\\fluis_nuf\\.gradle\\caches\\9.4.1\\transforms\\f22a2259806c4ea6647b5b09214537ca\\transformed\\wear-1.4.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\afda89a715026913ac2445ecce6536d3\\transformed\\wear-1.4.0\\res\\values-en-rCA\\values-en-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6",
                         "startColumns": "4,4,4,4,4",
@@ -30,11 +30,28 @@
                         "endOffsets": "159,282,394,503,619"
                     },
                     "to": {
-                        "startLines": "9,10,11,13,14",
+                        "startLines": "36,37,38,41,42",
                         "startColumns": "4,4,4,4,4",
-                        "startOffsets": "773,882,1005,1218,1327",
+                        "startOffsets": "3480,3589,3712,4008,4117",
                         "endColumns": "108,122,111,108,115",
-                        "endOffsets": "877,1000,1112,1322,1438"
+                        "endOffsets": "3584,3707,3819,4112,4228"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\LAB DESARROLLO 01\\.gradle\\caches\\9.4.1\\transforms\\ebc5c6c6e4fff2577c8e495cca518225\\transformed\\core-1.15.0\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,451,555,657,773",
+                        "endColumns": "95,101,98,98,103,101,115,100",
+                        "endOffsets": "146,248,347,446,550,652,768,869"
+                    },
+                    "to": {
+                        "startLines": "29,30,31,32,33,34,35,40",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "2762,2858,2960,3059,3158,3262,3364,3907",
+                        "endColumns": "95,101,98,98,103,101,115,100",
+                        "endOffsets": "2853,2955,3054,3153,3257,3359,3475,4003"
                     }
                 }
             ]

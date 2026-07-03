@@ -1,19 +1,25 @@
 [versions]
-agp = "9.2.1"
-coreKtx = "1.19.0"
+agp = "8.7.3"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 appcompat = "1.7.1"
-material = "1.14.0"
+material = "1.12.0"
 constraintlayout = "2.2.1"
-activityKtx = "1.13.0"
+activityKtx = "1.9.3"
 navigationFragmentKtx = "2.9.8"
 navigationUiKtx = "2.9.8"
-room = "2.8.4"
+room = "2.6.1"
 work = "2.10.0"
 playServicesWearable = "19.0.0"
-ksp = "2.3.9"
+ksp = "2.0.21-1.0.27"
+hilt = "2.52"
+timber = "5.0.1"
+gson = "2.12.1"
+datastore = "1.1.2"
+material3 = "1.3.1"
+lifecycle = "2.8.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -22,6 +28,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
@@ -36,9 +43,19 @@ androidx-wear = { group = "androidx.wear", name = "wear", version = "1.4.0" }
 wear-compose-material = { group = "androidx.wear.compose", name = "compose-material", version = "1.6.2" }
 wear-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version = "1.6.2" }
 androidx-health-services = { group = "androidx.health", name = "health-services-client", version = "1.0.0" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+
+kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version = "1.8.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version = "2.1.10" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version = "2.0.21" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 

@@ -1,10 +1,10 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
@@ -12,27 +12,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.ExistingPeriodicWorkPolicy
-import com.example.myapplication.service.SyncWorker
-import java.util.concurrent.TimeUnit
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -44,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        checkPermissions()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -60,74 +41,17 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        setupAutoSync()
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Sincronizando con el Reloj...", Snackbar.LENGTH_LONG)
-                .setAction("Acción", null)
-                .setAnchorView(R.id.fab).show()
-            
-            // Forzar detección de nodos
-            com.google.android.gms.wearable.Wearable.getNodeClient(this).connectedNodes
-                .addOnSuccessListener { nodes ->
-                    Log.d("MainActivity", "Nodos detectados manualmente: ${nodes.size}")
-                    if (nodes.isEmpty()) {
-                        Snackbar.make(view, "No se detecta el reloj. Verifica el Bluetooth.", Snackbar.LENGTH_SHORT).show()
-                    } else {
-                        Snackbar.make(view, "Reloj vinculado: ${nodes.size} dispositivo(s)", Snackbar.LENGTH_SHORT).show()
-                    }
-                }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun setupAutoSync() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val syncRequest = PeriodicWorkRequestBuilder<SyncWorker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .build()
-
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "AtlasSync",
-            ExistingPeriodicWorkPolicy.KEEP,
-            syncRequest
-        )
-    }
-
-    private fun checkPermissions() {
-        val permissions = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            permissions.add(Manifest.permission.BLUETOOTH_SCAN)
-            permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
-        } else {
-            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-
-        val toRequest = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
-
-        if (toRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, toRequest.toTypedArray(), 101)
         }
     }
 
