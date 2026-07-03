@@ -41,6 +41,7 @@ class MainActivity : Activity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Wear", "MainActivity iniciada")
         setContentView(R.layout.activity_main)
 
         tvStatus = findViewById(R.id.tv_status)
@@ -53,8 +54,14 @@ class MainActivity : Activity(), SensorEventListener {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
+        // Verificar sensores disponibles para depuración
+        if (heartRateSensor == null) Log.w("Wear", "Sensor de Ritmo Cardiaco NO disponible")
+        if (accelerometer == null) Log.w("Wear", "Acelerómetro NO disponible")
+        if (gyroscope == null) Log.w("Wear", "Giroscopio NO disponible")
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS)
             != PackageManager.PERMISSION_GRANTED) {
+            Log.d("Wear", "Solicitando permisos de sensores")
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BODY_SENSORS), 1)
         } else {
             registerSensors()

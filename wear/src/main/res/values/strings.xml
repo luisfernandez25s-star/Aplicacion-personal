@@ -7,4 +7,9 @@
     <string name="waiting_status">Esperando sensores...</string>
     <string name="no_connection">Buscando celular...</string>
     <string name="connected">Conectado (Bluetooth/Red)</string>
+    <string name="monitor_title">MONITOR WEAR</string>
+    <string name="hr_default">Ritmo: --</string>
+    <string name="accel_default">Accel: --</string>
+    <string name="gyro_default">Gyro: --</string>
+    <string name="init_status">Iniciando...</string>
 </resources>

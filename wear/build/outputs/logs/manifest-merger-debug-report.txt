@@ -110,11 +110,11 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\fluis_nuf\.gradle\
 	android:theme
 		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:17:9-59
 uses-library#com.google.android.wearable
-ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-21:39
+ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:19:9-21:40
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:23:9-25:40
 MERGED from [androidx.wear:wear:1.4.0] C:\Users\fluis_nuf\.gradle\caches\9.4.1\transforms\02384b026396cbea94f109607050b2d7\transformed\wear-1.4.0\AndroidManifest.xml:23:9-25:40
 	android:required
-		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:13-36
+		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:21:13-37
 	android:name
 		ADDED from C:\Users\fluis_nuf\AndroidStudioProjects\Aplicacion-personal\wear\src\main\AndroidManifest.xml:20:13-55
 activity#com.example.myapplication.MainActivity
