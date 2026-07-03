@@ -20,18 +20,16 @@ class WearableService : WearableListenerService() {
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         Log.d("WearableService", "Evento de datos recibido: ${dataEvents.count} eventos")
         for (event in dataEvents) {
-            if (event.type == DataEvent.TYPE_CHANGED) {
-                val path = event.dataItem.uri.path
-                if (path == "/sensor_data") {
-                    val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-                    val sensorName = dataMap.getString("sensor_name") ?: "Unknown"
-                    val valX = dataMap.getFloat("value_x")
-                    val valY = dataMap.getFloat("value_y")
-                    val valZ = dataMap.getFloat("value_z")
-                    val timestamp = dataMap.getLong("timestamp")
+            val path = event.dataItem.uri.path ?: ""
+            if (event.type == DataEvent.TYPE_CHANGED && path.startsWith("/sensor_data")) {
+                val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
+                val sensorName = dataMap.getString("sensor_name") ?: "Unknown"
+                val valX = dataMap.getFloat("value_x")
+                val valY = dataMap.getFloat("value_y")
+                val valZ = dataMap.getFloat("value_z")
+                val timestamp = dataMap.getLong("timestamp")
 
-                    saveToDatabase(sensorName, valX, valY, valZ, timestamp)
-                }
+                saveToDatabase(sensorName, valX, valY, valZ, timestamp)
             }
         }
     }
