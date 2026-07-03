@@ -84,7 +84,8 @@ class FirstFragment : Fragment(), DataClient.OnDataChangedListener {
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         for (event in dataEvents) {
             val path = event.dataItem.uri.path ?: ""
-            if (event.type == DataEvent.TYPE_CHANGED && path == "/sensor_data") {
+            // FLEXIBILIDAD TOTAL: Capturar cualquier dato que contenga sensor_data
+            if (event.type == DataEvent.TYPE_CHANGED && path.contains("sensor_data")) {
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
                 val sensorName = dataMap.getString("sensor_name") ?: "Sensor"
                 val x = dataMap.getFloat("value_x")
