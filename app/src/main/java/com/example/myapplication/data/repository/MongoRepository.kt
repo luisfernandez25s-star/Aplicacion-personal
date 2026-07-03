@@ -1,11 +1,8 @@
 package com.example.myapplication.data.repository
 
-import com.example.myapplication.data.local.SensorDao
-import com.example.myapplication.data.local.SensorEntity
 import com.example.myapplication.data.manager.SettingsManager
 import com.example.myapplication.data.model.SensorData
 import com.example.myapplication.data.remote.SensorApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +13,6 @@ import javax.inject.Singleton
 
 @Singleton
 class MongoRepository @Inject constructor(
-    private val sensorDao: SensorDao,
     private val sensorApi: SensorApi,
     private val settingsManager: SettingsManager
 ) {
@@ -30,45 +26,30 @@ class MongoRepository @Inject constructor(
         CONNECTED, DISCONNECTED, CONNECTING, ERROR
     }
 
-    init {
-        // La sincronización ahora es manual mediante el botón
-    }
-
-    suspend fun saveSensorData(data: SensorData) {
-        try {
-            val entity = SensorEntity.fromSensorData(data)
-            sensorDao.insert(entity)
-            Timber.d("Data saved locally in Room (Waiting for manual sync)")
-        } catch (e: Exception) {
-            Timber.e(e, "Critical error saving sensor data locally")
-        }
-    }
-
     suspend fun manualSync(data: SensorData?) {
         if (data == null) {
-            _errorMessage.value = "No hay datos del reloj para subir"
+            _errorMessage.value = "No hay datos del reloj en pantalla"
             return
         }
         
         try {
             _connectionStatus.value = ConnectionStatus.CONNECTING
-            
-            val baseUrl = settingsManager.mongoUriFlow.first() ?: throw Exception("URL de API no configurada")
+            val baseUrl = settingsManager.mongoUriFlow.first() ?: throw Exception("URL no configurada")
             val fullUrl = if (baseUrl.endsWith("/")) "${baseUrl}api/sensors" else "$baseUrl/api/sensors"
             
-            Timber.d("Syncing single record to $fullUrl")
+            Timber.i("SUBIDA MANUAL: Enviando un único registro a $fullUrl")
             
             val response = sensorApi.sendSensorData(fullUrl, data)
             if (response.isSuccessful) {
-                Timber.d("Successfully synced to Render")
                 _connectionStatus.value = ConnectionStatus.CONNECTED
                 _errorMessage.value = null
+                Timber.i("SUBIDA EXITOSA: Se guardó 1 registro.")
             } else {
-                throw Exception("Error del servidor: ${response.code()}")
+                throw Exception("Error ${response.code()}")
             }
         } catch (e: Exception) {
             _connectionStatus.value = ConnectionStatus.ERROR
-            _errorMessage.value = "Sync failed: ${e.message}"
+            _errorMessage.value = "Fallo: ${e.message}"
         }
     }
 }
