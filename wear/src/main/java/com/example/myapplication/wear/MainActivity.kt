@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.myapplication.wear.data.sensor.AccelerometerSensor
 import com.example.myapplication.wear.data.sensor.GyroscopeSensor
@@ -41,8 +42,14 @@ class MainActivity : ComponentActivity() {
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { result ->
-        Timber.d("Permission result: $result")
-        startSensors()
+        val allGranted = result.values.all { it }
+        if (allGranted) {
+            Timber.i("Permisos concedidos por el usuario")
+            Toast.makeText(this, "Permisos concedidos", Toast.LENGTH_SHORT).show()
+        } else {
+            Timber.w("El usuario rechazó algunos permisos")
+            Toast.makeText(this, "Faltan permisos para sensores", Toast.LENGTH_LONG).show()
+        }
     }
 
     private val handler = Handler(Looper.getMainLooper())
@@ -58,7 +65,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("MainActivity: onCreate started")
         setContentView(R.layout.activity_main)
 
         tvStatus = findViewById(R.id.tv_status)
@@ -68,33 +74,26 @@ class MainActivity : ComponentActivity() {
         btnSync = findViewById(R.id.btn_sync)
         swSimulate = findViewById(R.id.sw_simulate)
 
-        // Detección de emulador mejorada
+        // Detección de emulador (solo visual, no arranca sensores)
         if (Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator") || Build.FINGERPRINT.contains("generic")) {
             swSimulate.isChecked = true
-            Timber.i("Emulador detectado: Simulación activada")
-        }
-
-        swSimulate.setOnCheckedChangeListener { _, isChecked ->
-            restartSensors(isChecked)
         }
 
         btnSync.setOnClickListener {
             if (checkPermissions()) {
-                startSensorService()
-                restartSensors(swSimulate.isChecked)
+                startSensors()
+                Toast.makeText(this, "Iniciando captura...", Toast.LENGTH_SHORT).show()
             } else {
                 requestRequiredPermissions()
             }
         }
 
-        // Delay para evitar conflictos con el diálogo de permisos al arrancar
+        // Al iniciar, PEDIMOS permisos si faltan, pero NO arrancamos sensores
         handler.postDelayed({
             if (!checkPermissions()) {
                 requestRequiredPermissions()
-            } else {
-                startSensors()
             }
-        }, 1500)
+        }, 1000)
 
         checkNodes()
     }
@@ -102,7 +101,11 @@ class MainActivity : ComponentActivity() {
     private fun checkPermissions(): Boolean {
         val bodySensors = ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED
         val activityRec = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED
-        return bodySensors && activityRec
+        val notifications = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        } else true
+
+        return bodySensors && activityRec && notifications
     }
 
     private fun requestRequiredPermissions() {
@@ -113,7 +116,6 @@ class MainActivity : ComponentActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
         }
-        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.POST_NOTIFICATIONS)
@@ -121,29 +123,27 @@ class MainActivity : ComponentActivity() {
         }
 
         if (permissions.isNotEmpty()) {
-            Timber.i("Requesting permissions: $permissions")
             requestPermissionLauncher.launch(permissions.toTypedArray())
-        } else {
-            startSensors()
         }
     }
 
     private fun startSensors() {
-        Timber.d("startSensors: Initializing sensors UI")
-        startSensorService()
+        // Arrancamos el servicio de fondo
+        val serviceIntent = Intent(this, WearSensorService::class.java).apply {
+            putExtra("simulate", swSimulate.isChecked)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
+        }
         
+        // Arrancamos la UI local
         heartRateSensor.start(forceMock = swSimulate.isChecked)
         accelerometerSensor.start(forceMock = swSimulate.isChecked)
         gyroscopeSensor.start(forceMock = swSimulate.isChecked)
         
         observeSensors()
-    }
-
-    private fun restartSensors(simulate: Boolean) {
-        heartRateSensor.stop()
-        accelerometerSensor.stop()
-        gyroscopeSensor.stop()
-        startSensors()
     }
 
     private fun observeSensors() {
@@ -166,17 +166,6 @@ class MainActivity : ComponentActivity() {
                 tvGyro.text = String.format(Locale.getDefault(), "G: %.1f, %.1f, %.1f", values[0], values[1], values[2])
             }
         }.launchIn(scope).also { sensorJobs.add(it) }
-    }
-
-    private fun startSensorService() {
-        val serviceIntent = Intent(this, WearSensorService::class.java).apply {
-            putExtra("simulate", swSimulate.isChecked)
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
     }
 
     private fun checkNodes() {
