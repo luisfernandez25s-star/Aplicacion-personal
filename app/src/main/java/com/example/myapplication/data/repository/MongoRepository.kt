@@ -28,28 +28,34 @@ class MongoRepository @Inject constructor(
 
     suspend fun manualSync(data: SensorData?) {
         if (data == null) {
-            _errorMessage.value = "No hay datos del reloj en pantalla"
+            _errorMessage.value = "No hay datos en pantalla"
             return
         }
         
         try {
             _connectionStatus.value = ConnectionStatus.CONNECTING
             val baseUrl = settingsManager.mongoUriFlow.first() ?: throw Exception("URL no configurada")
-            val fullUrl = if (baseUrl.endsWith("/")) "${baseUrl}api/sensors" else "$baseUrl/api/sensors"
             
-            Timber.i("SUBIDA MANUAL: Enviando un único registro a $fullUrl")
+            // Volvemos a la ruta /batch que funcionaba antes
+            val fullUrl = if (baseUrl.endsWith("/")) "${baseUrl}api/sensors/batch" else "$baseUrl/api/sensors/batch"
             
-            val response = sensorApi.sendSensorData(fullUrl, data)
+            // Enviamos los datos como una LISTA de un solo elemento (para que el servidor no falle)
+            val dataList = listOf(data)
+            
+            Timber.i("SUBIDA MANUAL: Enviando 1 registro a $fullUrl")
+            
+            val response = sensorApi.sendSensorDataBatch(fullUrl, dataList)
             if (response.isSuccessful) {
                 _connectionStatus.value = ConnectionStatus.CONNECTED
                 _errorMessage.value = null
-                Timber.i("SUBIDA EXITOSA: Se guardó 1 registro.")
+                Timber.i("¡ÉXITO! Registro guardado.")
             } else {
-                throw Exception("Error ${response.code()}")
+                throw Exception("Servidor respondió con error ${response.code()}")
             }
         } catch (e: Exception) {
             _connectionStatus.value = ConnectionStatus.ERROR
             _errorMessage.value = "Fallo: ${e.message}"
+            Timber.e("Error en manualSync: ${e.message}")
         }
     }
 }
