@@ -89,11 +89,9 @@ class MainActivity : ComponentActivity() {
         }
 
         // Al iniciar, PEDIMOS permisos si faltan, pero NO arrancamos sensores
-        handler.postDelayed({
-            if (!checkPermissions()) {
-                requestRequiredPermissions()
-            }
-        }, 1000)
+        if (!checkPermissions()) {
+            requestRequiredPermissions()
+        }
 
         checkNodes()
     }

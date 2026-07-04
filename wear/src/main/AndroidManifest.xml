@@ -44,7 +44,7 @@
             android:name=".service.WearSensorService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice|health" />
+            android:foregroundServiceType="health" />
 
         <meta-data
             android:name="com.google.android.wearable.standalone"

@@ -14,7 +14,7 @@ import timber.log.Timber
 abstract class BaseSensor(
     context: Context,
     private val sensorType: Int,
-    private val sensorDelay: Int = SensorManager.SENSOR_DELAY_NORMAL
+    private var sensorDelay: Int = SensorManager.SENSOR_DELAY_NORMAL
 ) : SensorEventListener {
 
     protected val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -50,6 +50,10 @@ abstract class BaseSensor(
         _dataFlow.value = when (sensorType) {
             Sensor.TYPE_HEART_RATE -> floatArrayOf(0f)
             else -> floatArrayOf(0f, 0f, 0f)
+        }
+
+        if (sensorType == Sensor.TYPE_HEART_RATE) {
+            sensorDelay = SensorManager.SENSOR_DELAY_FASTEST
         }
 
         val registered = sensorManager.registerListener(this, sensor, sensorDelay)
